@@ -20,22 +20,22 @@ export default function Navbar() {
     },
     {
       name: "Projects",
-      href: "/projects",
+      href: "/#projects",
       timeout: 500,
     },
     {
       name: "Skills",
-      href: "/skills",
+      href: "/#skills",
       timeout: 500,
     },
     {
       name: "Contact",
-      href: "/contact",
+      href: "/#contact",
       timeout: 500,
     },
     {
       name: "Blog",
-      href: "/blog",
+      href: "/#blog",
       timeout: 500,
     },
   ];

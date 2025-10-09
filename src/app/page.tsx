@@ -2,43 +2,49 @@
 
 import React, { useState, useEffect } from "react";
 import Lander from "@/components/Lander";
+import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
+import Blog from "@/components/Blog";
 
 export default function Page() {
-
   return (
     <>
-      <Lander />
-
-
+      <section id="home" className="w-full h-screen overflow-hidden">
+        <Lander />
+      </section>
 
       {/* <Player /> */}
 
-      {/* <section
+      <section
         id="projects"
-        className="w-full h-screen bg-black flex flex-row items-center justify-center"
+        className="w-full h-screen bg-back flex flex-row items-center justify-center"
       >
         <Projects />
-      </section> */}
+      </section>
 
-      {/* <section
+      <section
         id="skills"
         className="w-full h-screen bg-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Skills />
-      </section> */}
+      </section>
 
-      {/* <div className="w-full h-screen bg-black flex flex-row items-center justify-center">
-        <div className="w-full h-full flex flex-col justify-center items-center ">
-          <p>Blog</p>
-        </div>
-      </div> */}
-
-      {/* <section
+      <section
         id="contact"
         className="w-full h-screen bg-white text-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Contact />
-      </section> */}
+      </section>
+
+      <section
+        id="blog"
+        className="w-full h-screen bg-black flex flex-row items-center justify-center"
+      >
+        <div className="w-full h-full flex flex-col justify-center items-center ">
+          <Blog />
+        </div>
+      </section>
 
       {/* <div className="w-screen h-screen bg-red-200 text-white flex flex-row items-center justify-center">
         <div className="w-full h-full flex flex-col justify-center items-center ">

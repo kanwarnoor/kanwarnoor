@@ -21,7 +21,7 @@ export default function Lander() {
 
   return (
     <>
-      <div className="w-screen h-screen bg-back flex flex-col items-center justify-center overflow-hidden hidden md:flex">
+      <div className="w-screen h-screen bg-back flex flex-col items-center justify-center overflow-hidden">
         <div
           className="absolute top-0 left-0 w-screen h-screen opacity-100"
           style={{ height: "-webkit-fill-available" }}
@@ -62,14 +62,14 @@ export default function Lander() {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
           className={`flex items-center justify-center ${
-            route === "/" ? "gap-[15rem]" : "gap-5"
+            route === "/" ? "gap-5" : "gap-5"
           }`}
         >
-          <p className="text-7xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
+          <p className="md:text-7xl text-5xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
             N
           </p>
           <AnimatePresence>
-            {route !== "/" && (
+       
               <motion.div
                 initial={{ rotate: 0, scale: 1 }}
                 animate={{
@@ -93,23 +93,28 @@ export default function Lander() {
                   scale: 1.2,
                   transition: { duration: 0.2, ease: "easeOut" },
                 }}
-                className="z-10 mt-6"
+                className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${route == "/" ? "opacity-0" : "opacity-100"} `}
               >
                 <Image
                   src="/logo/logo-red.png"
                   alt="Lander"
-                  width={200}
-                  height={200}
-                  className="flex justify-center items-center  z-10 cursor-pointer "
+                  width={0}
+                  height={0}
+                  sizes="100% 100%"
+                  className="flex justify-center w-full h-full items-center  z-50 cursor-pointer "
                 />
               </motion.div>
-            )}
+ 
           </AnimatePresence>
 
-          <p className="text-7xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
+          <p className="md:text-7xl text-5xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
             R
           </p>
         </motion.div>
+
+        <div className={`md:-z-0 z-10 flex justify-center items-center mt-5`}>
+          <Button link={"/Kanwarnoor_Resume.pdf"} type={"secondary"} theme={"dark"} text={"⬇️ Resume"} />
+        </div>
 
         {/* <p className="text-2xl font-extrabold uppercase">Fullstack Developer</p> */}
       </div>
@@ -133,7 +138,7 @@ export default function Lander() {
         </div>
 
         {/* mobile view */}
-        <div className="flex flex-col items-center justify-center gap-5 w-screen h-[100lvh] ">
+        {/* <div className="hidden flex-col items-center justify-center gap-5 w-screen h-[100lvh] ">
           <div className="flex flex-col items-center justify-center gap-5 mt-10">
             <p className="text-6xl font-extrabold font-bebas uppercase ">
               Coming soon
@@ -149,7 +154,7 @@ export default function Lander() {
               Coming soon
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* <p className="text-2xl font-extrabold uppercase">Fullstack Developer</p> */}
       </div>

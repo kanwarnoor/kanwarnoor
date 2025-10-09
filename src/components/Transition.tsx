@@ -41,7 +41,7 @@ export default function Transition() {
               animate={{ x: route !== pathname ? "0%" : "-100%" }}
               transition={{ duration: 0.5 }}
               exit={{ x: "-100%" }}
-              className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center"
+              className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden"
             >
               {/* <p className="text-2xl font-bold capitalize">{route.split("/")[1]}</p> */}
             </motion.div>
@@ -60,7 +60,7 @@ export default function Transition() {
               opacity: 0,
               transition: { duration: 0.1, ease: "easeInOut" },
             }}
-            className="w-fit h-fit absolute top-0 left-0 right-0 bottom-0 m-auto z-50 text-white text-center flex items-center justify-center"
+            className="w-fit h-fit absolute top-0 left-2 right-0 bottom-[4rem] m-auto z-50 text-white text-center flex items-center justify-center"
           >
             <motion.div
               initial={{ rotate: 0, scale: 1 }}
@@ -80,7 +80,7 @@ export default function Transition() {
                 scale: 1.2,
                 transition: { duration: 0.2, ease: "easeOut" },
               }}
-              className="z-10 mt-6"
+              className="z-10 md:mt-6 mt-4 md:w-48 w-32"
             >
               <Image
                 src="/logo/logo-red.webp"
