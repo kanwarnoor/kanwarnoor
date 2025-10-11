@@ -21,9 +21,9 @@ export default function Button(Props: ButtenProps) {
             router.push(Props.link);
           }
         }}
-        className={`text-base w-fit z-50 font-bold ${
+        className={`text-base w-fit z-40 font-bold ${
           Props.theme === "dark" ? "bg-white text-black" : "bg-black text-white"
-        } px-4  py-2 flex items-center justify-center cursor-pointer`}
+        } px-4 py-2 flex items-center justify-center cursor-pointer`}
       >
         {Props.loading ? (
           <>
@@ -39,8 +39,8 @@ export default function Button(Props: ButtenProps) {
   return (
     <Link
       href={Props.link || "/"}
-      className={`md:text-base text-sm font-bold z-50 flex w-fit border-2 border-dashed items-center justify-center ${
-        Props.theme === "dark" ? "text-white" : "text-black"
+      className={`md:text-base bg-white text-sm font-bold z-40 flex w-fit border-2 rounded-md items-center justify-center ${
+        Props.theme === "dark" ? "text-black" : "text-black"
       }  px-4 py-2`}
     >
       {Props.loading ? (

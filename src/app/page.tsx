@@ -25,7 +25,7 @@ export default function Page() {
 
       <section
         id="skills"
-        className="w-full h- md:hidden bg-black flex flex-row items-center justify-center overflow-hidden"
+        className="w-full h-screen md:hidden bg-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Skills />
       </section>

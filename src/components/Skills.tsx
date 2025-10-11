@@ -104,7 +104,7 @@ export default function Skills() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <div className=" w-full h-full flex flex-row-reverse  items-center justify-center">
+    <div className=" w-screen h-screen overflow-hidden flex flex-row-reverse items-center justify-center">
       {/* <div className="flex flex-col items-center justify-center">
         <div className="w-fit h-fit mr-auto pr-4 flex flex-row gap-2 justify-center items-center">
           {Array.from({ length: 5 }).map((_, index) => {
@@ -183,11 +183,11 @@ export default function Skills() {
               duration: 1,
               delay: 0.3,
             }}
-            className="bg-back w-[80%] rounded-r-full h-[150%] left-0 rounded-xl absolute blur-3xl -translate-x-[15%]"
+            className="bg-back md:w-[80%] w-[120%] rounded-r-full h-[150%] overflow-hidden left-0 rounded-xl absolute blur-3xl md:-translate-x-[15%] -translate-x-[30%]"
           ></motion.div>
 
-          <div className="absolute flex flex-col ml-10 left-0 ">
-            <div className="w-fit h-fit grid grid-cols-3  justify-center items-center gap-5">
+          <div className="absolute flex flex-col md:ml-10 md:left-0">
+            <div className="w-fit h-fit grid md:grid-cols-3 grid-cols-2  justify-center items-center gap-5">
               {skills.map((skill, index) => {
                 return (
                   (selected === index || selected === null) && (
