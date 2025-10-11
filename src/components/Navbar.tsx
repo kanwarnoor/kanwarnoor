@@ -12,30 +12,36 @@ import { LoadingContext } from "@/context/loadingContext";
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+
   const links = [
     {
       name: "Home",
-      href: "/",
+      hrefPC: "/",
+      hrefMobile: "/#home",
       timeout: 0,
     },
     {
       name: "Projects",
-      href: "/#projects",
+      hrefPC: "/projects",
+      hrefMobile: "/#projects",   
       timeout: 500,
     },
     {
       name: "Skills",
-      href: "/#skills",
+      hrefPC: "/skills",
+      hrefMobile: "/#skills",
       timeout: 500,
     },
     {
       name: "Contact",
-      href: "/#contact",
+      hrefPC: "/contact",
+      hrefMobile: "/#contact",
       timeout: 500,
     },
     {
       name: "Blog",
-      href: "/#blog",
+      hrefPC: "/blog",
+      hrefMobile: "/#blog",
       timeout: 500,
     },
   ];
@@ -49,10 +55,7 @@ export default function Navbar() {
         className=" fixed top-0 m-5 z-40 flex cursor-pointer"
         onClick={() => {
           setRoute("/");
-          const timeout = setTimeout(() => {
-            router.push("/");
-          }, 0);
-          return () => clearTimeout(timeout);
+          router.push("/");
         }}
       >
         <Image src="/logo/logo-white.webp" alt="logo" width={35} height={35} />
@@ -69,12 +72,12 @@ export default function Navbar() {
                 transition={{ duration: 1, delay: index * 0.2 }}
                 key={link.name}
                 className={`cursor-pointer hover:underline transition-all duration-300 ${
-                  link.href === pathname ? "underline" : "no-underline"
+                  link.hrefPC === pathname ? "underline" : "no-underline"
                 } ${pathname === "/contact" ? "text-white bg-black" : "text-white"}`}
                 onClick={() => {
-                  setRoute(link.href);
+                  setRoute(link.hrefPC || link.hrefMobile || "");
                   const timeout = setTimeout(() => {
-                    router.push(link.href);
+                    router.push(link.hrefPC || link.hrefMobile || "");
                   }, link.timeout);
                   return () => clearTimeout(timeout);
                 }}
