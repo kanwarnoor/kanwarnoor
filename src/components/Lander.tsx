@@ -120,7 +120,7 @@ export default function Lander() {
       </div>
 
       <div className="min-h-screen w-screen h-[100dvh] bg-back flex flex-col items-center justify-center overflow-hidden md:hidden">
-        <div className="absolute top-0 left-0 w-screen  opacity-100">
+        {/* <div className="absolute top-0 left-0 w-screen  opacity-100">
           {isClient && (
             <>
               <video
@@ -135,7 +135,7 @@ export default function Lander() {
               />
             </>
           )}
-        </div>
+        </div> */}
 
         {/* mobile view */}
         {/* <div className="hidden flex-col items-center justify-center gap-5 w-screen h-[100lvh] ">

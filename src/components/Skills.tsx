@@ -13,12 +13,12 @@ export default function Skills() {
       shorty: "react",
       link: "https://react.dev/",
       image: "/images/skills/react.webp",
-      description: "JavaScript library for building user interfaces",
+      description: "React is a JavaScript library for building user interfaces",
     },
     {
       name: "Next.js",
       shorty: "next",
-      description: "React framework for building server-side apps",
+      description: "Next.js is a React framework for building server-side apps",
       image: "/images/skills/next.webp",
       link: "https://nextjs.org/",
     },
@@ -26,14 +26,14 @@ export default function Skills() {
       name: "Tailwind CSS",
       shorty: "tailwind",
       description:
-        "Utility-first CSS framework for building responsive user interfaces",
+        "Tailwind CSS is a utility-first CSS framework for building responsive user interfaces",
       image: "/images/skills/tailwind.webp",
       link: "https://tailwindcss.com/",
     },
     {
       name: "TypeScript",
       description:
-        " Strongly typed programming language that builds on JavaScript",
+        "TypeScript is a strongly typed programming language that builds on JavaScript",
       shorty: "TypeScript",
       image: "/images/skills/ts.webp",
       link: "https://www.typescriptlang.org/",
@@ -49,31 +49,35 @@ export default function Skills() {
       name: "Git/Github",
       shorty: "GITHUB",
       image: "/images/skills/git.webp",
-      description: "Version control system for tracking changes in code",
+      description: "Git is a version control system for tracking changes in code",
       link: "https://github.com/",
     },
     {
       name: "AWS",
       shorty: "aws",
       image: "/images/skills/aws.webp",
+      description: "AWS is a cloud platform for building scalable and reliable applications",
       link: "https://aws.amazon.com/",
     },
     {
       name: "Python",
       shorty: "python",
       image: "/images/skills/python.webp",
+      description: "Python is a programming language for building scalable and reliable applications",
       link: "https://www.python.org/",
     },
     {
       name: "Java",
       shorty: "java",
       image: "/images/skills/java.webp",
+      description: "Java is a programming language for building scalable and reliable applications",
       link: "https://www.java.com/",
     },
     {
       name: "C/C++",
       shorty: "CPP",
       image: "/images/skills/c++.webp",
+      description: "C++ is a programming language for building scalable and reliable applications",
       link: "https://en.wikipedia.org/wiki/C%2B%2B",
     },
 
@@ -81,18 +85,21 @@ export default function Skills() {
       name: "MongoDB",
       shorty: "mongodb",
       image: "/images/skills/mongo.webp",
+      description: "MongoDB is a NoSQL database for building scalable and reliable applications",
       link: "https://www.mongodb.com/",
     },
     {
       name: "Framer Motion",
       shorty: "framer",
       image: "/images/skills/framer.webp",
+      description: "Framer Motion is a library for building scalable and reliable applications",
       link: "https://motion.dev/",
     },
     {
       name: "GSAP",
       shorty: "gsap",
       image: "/images/skills/gsap.webp",
+      description: "GSAP is a library for building scalable and reliable applications",
       link: "https://gsap.com/",
     },
   ];
@@ -188,10 +195,13 @@ export default function Skills() {
 
           <div className="absolute flex flex-col md:ml-10 md:left-0">
             <div className="w-fit h-fit grid md:grid-cols-3 grid-cols-2  justify-center items-center gap-5">
-              {skills.map((skill, index) => {
-                return (
-                  (selected === index || selected === null) && (
-                    <div key={index} className="w-full gap-5 flex flex-col items-center justify-center">
+              {selected === null &&
+                skills.map((skill, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="w-full gap-5 flex flex-col items-center justify-center"
+                    >
                       <motion.div
                         initial={{
                           opacity: 0,
@@ -217,14 +227,44 @@ export default function Skills() {
                           description={skill.description}
                         />
                       </motion.div>
-                      {selected === index && (
-                        <p className=" t ">{skill.description}</p>
-                      )}
                     </div>
-                  )
-                );
-              })}
+                  );
+                })}
             </div>
+
+            {selected !== null && (
+              <div className="w-[80%]  gap-5 flex flex-col m-auto items-center justify-center text-center relative">
+                {/* cross button svg */}
+                <button
+                  className="absolute top-0 right-0 cursor-pointer flex justify-center items-center"
+                  onClick={() => setSelected(null)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="size-8 hover:scale-110 duration-150 flex justify-center items-center "
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <p className="md:text-6xl flex text-center text-2xl font-bold">
+                  {skills[selected].name}
+                </p>
+                <p className="md:text-xl flex flex-col text-sm text-center">
+                  {skills[selected].description?.split("\n").map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </p>
+              </div>
+            )}
           </div>
         </>
       )}

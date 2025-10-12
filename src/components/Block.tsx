@@ -11,7 +11,7 @@ interface BlockProps {
 export default function Block({ name, image, description, link }: BlockProps) {
   return (
     <div
-      className="md:w-[18rem] w-[14rem] md:h-[50px] h-[40px] flex flex-row items-center text-white rounded-xl cursor-pointer text-center transition-all duration-300 gap-3  md:px-10 px-5 md:py-10 py-9  border-1 border-white/0 hover:border-white hover:bg-white/10"
+      className="md:w-[18rem] w-[10rem]  md:h-[50px] h-[40px] flex flex-row items-center text-white rounded-xl cursor-pointer text-center transition-all duration-300 gap-3  md:px-10 px-5 md:py-10 py-9  border-1 border-white/0 hover:border-white hover:bg-white/10"
       onClick={(e) => {
         if (link) {
           e.preventDefault();
@@ -21,7 +21,7 @@ export default function Block({ name, image, description, link }: BlockProps) {
     >
       <div className="flex flex-row md:items-center md:justify-start items-center justify-center w-full h-full gap-3">
         {image && (
-          <div className="md:w-[50px] w-[20%] flex flex-col justify-center items-center ">
+          <div className="md:w-[50px] w-[25%] flex flex-col justify-center items-center ">
             <Image
               src={image}
               alt={name}
