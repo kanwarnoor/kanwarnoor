@@ -114,7 +114,7 @@ export default function Contact() {
           </>
         ) : (
           <>
-            <div className="w-1/2 bg-front relative h-screen flex justify-center items-center">
+            <div className="w-1/2 bg-front relative h-screen md:flex justify-center items-center hidden">
               <AnimatePresence>
                 <motion.div
                   transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -167,7 +167,7 @@ export default function Contact() {
                 className="w-full h-full object-cover absolute mix-blend-hard-light britness-200 contrast-200 hue-rotate-180 overflow-hidden"
               />
             </div>
-            <div className="flex flex-col items-center justify-center w-1/2">
+            <div className="flex flex-col items-center justify-center md:w-1/2 w-full">
               <div className="flex flex-row justify-center items-center">
                 {Array.from(`Connect with me`).map((letter, index) => {
                   return (
@@ -272,7 +272,7 @@ export default function Contact() {
                   </form>
                 </div>
 
-                <div className="flex flex-col items-center justify-center w-1/2">
+                <div className="flex flex-col items-center justify-center md:w-1/2 w-full">
                   <p className="text-2xl font-bold">More ways to connect</p>
                   <div className="flex flex-row gap-5">
                     <a
