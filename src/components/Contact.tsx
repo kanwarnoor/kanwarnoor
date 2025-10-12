@@ -185,14 +185,14 @@ export default function Contact() {
                         duration: 0.5,
                         delay: index * 0.1,
                       }}
-                      className="text-7xl font-bold flex font-bebas"
+                      className="md:text-7xl text-6xl font-bold flex font-bebas"
                     >
                       {letter === " " ? "\u00A0" : letter}
                     </motion.p>
                   );
                 })}
               </div>
-              <p className=" w-[80%] text-center flex justify-center items-center">
+              <p className=" w-[80%] text-center flex justify-center items-center md:text-xl text-sm">
                 I'm always looking for new opportunities and collaborations. If
                 you have any questions or want to work together, please feel
                 free to contact me.

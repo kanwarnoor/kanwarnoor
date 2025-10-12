@@ -111,7 +111,7 @@ export default function Projects() {
                 duration: 0.5,
                 delay: index * 0.1,
               }}
-              className="text-7xl font-bold flex font-bebas"
+              className="md:text-7xl text-6xl font-bold flex font-bebas"
             >
               {letter}
             </motion.p>
