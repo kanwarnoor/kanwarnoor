@@ -6,6 +6,7 @@ import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
+import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
@@ -44,6 +45,10 @@ export default function Page() {
         <div className="w-full h-full flex flex-col justify-center items-center ">
           <Blog />
         </div>
+      </section>
+
+      <section id="footer" className="w-screen h-1/2 flex md:hidden">
+        <Footer />
       </section>
 
       {/* <div className="w-screen h-screen bg-red-200 text-white flex flex-row items-center justify-center">
