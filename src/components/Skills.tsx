@@ -205,12 +205,14 @@ export default function Skills() {
                       <motion.div
                         initial={{
                           opacity: 0,
+                          filter: "blur(20px)",
                         }}
-                        animate={{
+                        whileInView={{
                           opacity: 1,
+                          filter: "blur(0px)",
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 0.5,
                           delay: !loading ? index * 0.1 : index * 0.1 + 1,
                         }}
                         key={index}
