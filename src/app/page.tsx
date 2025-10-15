@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Lander from "@/components/Lander";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
@@ -19,35 +19,35 @@ export default function Page() {
 
       <section
         id="projects"
-        className="w-full h-screen bg-back md:hidden flex flex-row items-center justify-center"
+        className="w-full h-screen bg-back flex flex-row items-center justify-center"
       >
         <Projects />
       </section>
 
       <section
         id="skills"
-        className="w-full h-screen md:hidden bg-black flex flex-row items-center justify-center overflow-hidden"
+        className="w-full h-screen  bg-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Skills />
       </section>
 
       <section
         id="contact"
-        className="w-full h-screen md:hidden bg-white text-black flex flex-row items-center justify-center overflow-hidden"
+        className="w-full h-screen bg-white text-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Contact />
       </section>
 
-      <section
+      {/* <section
         id="blog"
-        className="w-full h-screen md:hidden bg-black flex flex-row items-center justify-center"
+        className="w-full h-screen  bg-black flex flex-row items-center justify-center"
       >
         <div className="w-full h-full flex flex-col justify-center items-center ">
           <Blog />
         </div>
-      </section>
+      </section> */}
 
-      <section id="footer" className="w-screen h-1/2 flex md:hidden">
+      <section id="footer" className="w-screen h-1/2 flex ">
         <Footer />
       </section>
 

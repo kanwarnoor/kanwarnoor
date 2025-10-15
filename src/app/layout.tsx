@@ -55,7 +55,7 @@ export default function RootLayout({
           {/* <Navbar /> */}
 
           <Loader />
-          <Transition />
+          {/* <Transition /> */}
           <Navbar />
           {/* <Player/> */}
 
