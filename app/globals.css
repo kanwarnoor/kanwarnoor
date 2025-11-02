@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Braah+One&family=Oswald:wght@200..700&display=swap");
+
+@import "tailwindcss";
+
+/* Custom Tailwind Colors */
+@theme {
+  --color-front: #850000;
+  --color-back: #250000;
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-oswald: "Oswald", sans-serif;
+  --font-braah: "Braah One", sans-serif;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: 100lvh;
+  min-height: -webkit-fill-available;
+  background-color: black;
+}
+
+.title {
+  font-family: var(--font-dm-serif);
+}
+
+.white-spinner {
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, white 94%, #0000) top/5px 5px
+      no-repeat,
+    conic-gradient(#0000 30%, white);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 5px), #000 0);
+  animation: spinner 1s infinite linear;
+}
+.black-spinner {
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, black 94%, #0000) top/5px 5px
+      no-repeat,
+    conic-gradient(#0000 30%, black);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 5px), #000 0);
+  animation: spinner 1s infinite linear;
+}
+.remaster-spinner {
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #fd1b00 94%, #0000) top/9px 9px
+      no-repeat,
+    conic-gradient(#0000 30%, #fd1b00);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: spinner 1s infinite linear;
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(1turn);
+  }
+}
