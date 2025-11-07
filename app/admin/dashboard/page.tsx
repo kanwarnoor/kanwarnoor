@@ -1,11 +1,18 @@
-"use client";
+"use server"
 
 import React from "react";
+import DashboardPage from "./DashboardPage";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function page() {
-  return (
-    <div className="w-screen h-screen bg-back flex flex-col items-center justify-center overflow-hidden gap-3">
-      <h1 className="text-4xl font-bold">Dashboard</h1>
-    </div>
-  );
+// Expose the logout function as a "server action"
+export async function logout() {
+  const cookieStore = await cookies();
+  console.log("Logging out");
+  cookieStore.delete("token");
+  redirect("/");
+}
+
+export default async function page() {
+  return <DashboardPage logout={logout} />;
 }
