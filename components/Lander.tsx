@@ -96,7 +96,7 @@ export default function Lander() {
                 className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${route == "/" ? "opacity-0" : "opacity-100"} `}
               >
                 <Image
-                  src="/logo/logo-red.png"
+                  src="/logo/logo-red.webp"
                   alt="Lander"
                   width={0}
                   height={0}

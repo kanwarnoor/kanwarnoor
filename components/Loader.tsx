@@ -54,7 +54,7 @@ export default function Loader() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   useEffect(() => {
