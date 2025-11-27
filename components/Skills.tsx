@@ -219,9 +219,9 @@ export default function Skills() {
                         onMouseEnter={() => setText(skill.shorty)}
                         onMouseLeave={() => setText("Skills")}
                         className="w-full"
-                        onClick={() =>
-                          setSelected((prev) => (prev === index ? null : index))
-                        }
+                        // onClick={() =>
+                        //   setSelected((prev) => (prev === index ? null : index))
+                        // }
                       >
                         <Block
                           name={skill.name}
