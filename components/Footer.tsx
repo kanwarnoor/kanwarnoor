@@ -41,7 +41,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="w-full h-full text-center flex-col justify-center items-center md:text-xl text-sm grid grid-cols-3 bg-gradient-to-r from-back to-front md:p-20 p-10">
+    <div className="w-full h-full text-center flex-col justify-center items-center md:text-xl text-sm grid grid-cols-2 bg-gradient-to-l from-back to-front md:p-20 p-10">
       <div className="flex flex-col justify-between items-center w-full h-full">
         <div>
           <p className="md:text-2xl text-base text-left">Developed by</p>
@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className=" w-full h-full justify-between items-center flex flex-col gap-5">
+      {/* <div className=" w-full h-full justify-between items-center flex flex-col gap-5">
         <p className="md:text-2xl text-xl font-bold mt-0">Quick Links</p>
 
         <div className="gap-3 flex flex-col">
@@ -70,7 +70,7 @@ export default function Footer() {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-5 justify-between items-center w-full h-full">
         <p className="md:text-2xl text-xl font-bold ">Connect</p>
