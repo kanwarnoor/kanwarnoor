@@ -119,7 +119,7 @@ export default function Projects() {
         })}
       </div>
       <div className="flex mr-auto pt-5 pb-3 pl-10 flex-row  gap-10">
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-row md:gap-3 gap-1">
           {filter.map((item, index) => {
             return (
               <motion.p
@@ -139,7 +139,7 @@ export default function Projects() {
                 //   color: item.active === true ? "black" : "white",
                 // }}
                 key={index}
-                className={`text-base cursor-pointer font-bold rounded-full px-4 py-2 hover:bg-white/50 hover:text-black first:hover:bg-white first:hover:text-black first:bg-white first:text-black`}
+                className={`md:text-base text-sm cursor-pointer font-bold rounded-full md:px-4 md:py-2 py-2 px-3 hover:bg-white/50 hover:text-black first:hover:bg-white first:hover:text-black first:bg-white first:text-black`}
                 onClick={() =>
                   setFilter(
                     filter.map((item, index1) => {

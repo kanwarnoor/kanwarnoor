@@ -113,7 +113,7 @@ export default function Lander() {
         </motion.div>
 
         <div className={`md:-z-0 z-10 flex justify-center items-center mt-5`}>
-          <Button link={"/Kanwarnoor_Resume.pdf"} type={"secondary"} theme={"dark"} text={"⬇️ Resume"} />
+          <Button link={"/Kanwarnoor_Resume.pdf"} type={"secondary"} theme={"dark"} text={"Resume"} />
         </div>
 
         {/* <p className="text-2xl font-extrabold uppercase">Fullstack Developer</p> */}
