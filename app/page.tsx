@@ -7,6 +7,7 @@ import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
+import About from "@/components/About"
 
 export default function Page() {
   return (
@@ -16,6 +17,13 @@ export default function Page() {
       </section>
 
       {/* <Player /> */}
+
+      <section
+        id="about"
+        className="w-full h-screen bg-gradient-to-b bg-back/50 to-back flex flex-row items-center justify-center"
+      >
+        <About />
+      </section>
 
       <section
         id="projects"
