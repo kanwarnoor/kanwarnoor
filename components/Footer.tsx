@@ -41,7 +41,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="w-full h-full text-center flex-col justify-center items-center md:text-xl text-sm grid grid-cols-2 bg-gradient-to-l from-back to-front md:p-20 p-10">
+    <div className="w-full h-full text-center flex-col justify-center items-center md:text-xl text-sm grid grid-cols-2 bg-gradient-to-r from-back to-front md:p-20 p-10">
       <div className="flex flex-col justify-between items-center w-full h-full">
         <div>
           <p className="md:text-2xl text-base text-left">Developed by</p>

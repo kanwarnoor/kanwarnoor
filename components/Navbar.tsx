@@ -31,6 +31,12 @@ export default function Navbar() {
       timeout: 0,
     },
     {
+      name: "About",
+      hrefPC: "/#about",
+      hrefMobile: "/#about",
+      timeout: 0,
+    },
+    {
       name: "Projects",
       hrefPC: "/#projects",
       hrefMobile: "/#projects",
