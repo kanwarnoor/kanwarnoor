@@ -34,29 +34,41 @@ export default function Projects() {
         })}
       </div>
       <div className="md:w-[50%] w-[70%] md:text-xl text-sm flex flex-col gap-5 mt-5 text-center text-white/70">
-        <p>
-          Hi, I’m <b className="text-white">Kanwarnoor Singh</b>, a{" "}
-          {new Date().getFullYear() == 2025
-            ? "3rd"
-            : new Date().getFullYear() == 2026
-            ? "4th"
-            : "5th"}{" "}
-          year Computer Science student at
-          <b className="text-white"> Guru Nanak Dev University</b>. I’m
-          passionate about computers and love building products from the ground
-          up, turning ideas into fully working systems with clear vision.
-        </p>
-        <p>
-          I specialize in <b className="text-white">Fullstack Web</b> and{" "}
-          <b className="text-white">Mobile Development</b>, and I enjoy working
-          on projects where clean architecture, performance, and usability
-          matter.
-        </p>
-        <p>
-          Outside of coding, I make music, play games, explore unconventional
-          albums, and watch obscure films. These are some creative spaces that
-          constantly influence how I think and build.
-        </p>
+        {[
+          <p key={0}>
+            Hi, I’m <b className="text-white">Kanwarnoor Singh</b>, a{" "}
+            {new Date().getFullYear() == 2025
+              ? "3rd"
+              : new Date().getFullYear() == 2026
+              ? "4th"
+              : "5th"}{" "}
+            year Computer Science student at
+            <b className="text-white"> Guru Nanak Dev University</b>. I’m
+            passionate about computers and love building products from the ground
+            up, turning ideas into fully working systems with clear vision.
+          </p>,
+          <p key={1}>
+            I specialize in <b className="text-white">Fullstack Web</b> and{" "}
+            <b className="text-white">Mobile Development</b>, and I enjoy working
+            on projects where clean architecture, performance, and usability
+            matter.
+          </p>,
+          <p key={2}>
+            Outside of coding, I make music, play games, explore unconventional
+            albums, and watch obscure films. These are some creative spaces that
+            constantly influence how I think and build.
+          </p>,
+        ].map((element, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: idx * 0.2 }}
+            viewport={{ once: false }}
+          >
+            {element}
+          </motion.div>
+        ))}
       </div>
     </div>
   );
