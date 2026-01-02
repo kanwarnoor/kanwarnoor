@@ -44,14 +44,15 @@ export default function Projects() {
               : "5th"}{" "}
             year Computer Science student at
             <b className="text-white"> Guru Nanak Dev University</b>. I’m
-            passionate about computers and love building products from the ground
-            up, turning ideas into fully working systems with clear vision.
+            passionate about computers and love building products from the
+            ground up, turning ideas into fully working systems with clear
+            vision.
           </p>,
           <p key={1}>
             I specialize in <b className="text-white">Fullstack Web</b> and{" "}
-            <b className="text-white">Mobile Development</b>, and I enjoy working
-            on projects where clean architecture, performance, and usability
-            matter.
+            <b className="text-white">Mobile Development</b>, and I enjoy
+            working on projects where clean architecture, performance, and
+            usability matter.
           </p>,
           <p key={2}>
             Outside of coding, I make music, play games, explore unconventional

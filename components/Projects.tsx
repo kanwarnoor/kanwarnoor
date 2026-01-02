@@ -56,6 +56,14 @@ export default function Projects() {
       animation: "center",
       tags: ["all", "personal"],
     },
+    {
+      title: "UK India Business Council",
+      des: "Client work Website for UK India Business Council",
+      image: "/images/projects/ukindia.webp",
+      link: "https://ukindia.vercel.app/",
+      animation: "center",
+      tags: ["all", "client"],
+    },
   ];
 
   const [filter, setFilter] = useState([
