@@ -60,7 +60,7 @@ export default function Projects() {
       title: "UK India Business Council",
       des: "Client work Website for UK India Business Council",
       image: "/images/projects/ukindia.webp",
-      link: "https://ukindia.vercel.app/",
+      link: "https://www.ukibc.com/",
       animation: "center",
       tags: ["all", "client"],
     },
