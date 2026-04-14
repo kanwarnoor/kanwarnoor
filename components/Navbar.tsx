@@ -82,12 +82,13 @@ export default function Navbar() {
           <ul className="flex-row text-xl md:flex hidden gap-10 font-medium m-5 justify-center">
             {links.map((link, index) => (
               <motion.li
+                viewport={{ once: true }}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+            
                 transition={{ duration: 1, delay: index * 0.2 }}
                 key={link.name}
-                className={`cursor-pointer hover:underline transition-all duration-300 ${
+                className={`cursor-pointer hover:underline transition-colors duration-300 ${
                   link.hrefPC === pathname ? "underline" : "no-underline"
                 } ${
                   pathname === "/#contact"
