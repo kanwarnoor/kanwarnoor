@@ -22,8 +22,8 @@
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.2",
-    "next": "^15.5.4",
-    "nodemailer": "^7.0.5",
+    "next": "^16.2.4",
+    "nodemailer": "^8.0.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
