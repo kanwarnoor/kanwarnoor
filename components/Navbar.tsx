@@ -30,7 +30,20 @@ export default function Navbar() {
       { name: "About", hrefPC: "/#about", hrefMobile: "/#about", timeout: 0 },
       { name: "Projects", hrefPC: "/#projects", hrefMobile: "/#projects", timeout: 500 },
       { name: "Skills", hrefPC: "/#skills", hrefMobile: "/#skills", timeout: 500 },
+      {
+        name: "Blog",
+        hrefPC: "/#blog",
+        hrefMobile: "/#blog",
+        timeout: 500,
+      },
       { name: "Contact", hrefPC: "/#contact", hrefMobile: "/#contact", timeout: 500 },
+    
+      // {
+      //   name: "Admin",
+      //   hrefPC: "/admin",
+      //   hrefMobile: "/admin",
+      //   timeout: 500,
+      // },
     ],
     []
   );
