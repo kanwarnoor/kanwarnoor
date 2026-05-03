@@ -1,6 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Braah+One&family=Oswald:wght@200..700&display=swap");
 
+@import '../styles/_variables.scss';
+@import '../styles/_keyframe-animations.scss';
+
+
 @import "tailwindcss";
+
+
 
 /* Custom Tailwind Colors */
 @theme {
@@ -53,4 +59,43 @@ body {
   100% {
     transform: rotate(1turn);
   }
+}
+
+.admin-editor-host {
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.admin-editor-host .simple-editor-wrapper {
+  width: 100%;
+  height: 60vh;
+  max-height: 60vh;
+}
+
+.admin-editor-host .simple-editor-content {
+  max-width: 100%;
+}
+
+.admin-editor-host .simple-editor-content .tiptap.ProseMirror.simple-editor {
+  padding: 1.5rem 1.5rem 4rem;
+}
+
+.blog-content {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.blog-content .tiptap.ProseMirror {
+  font-family: "Inter", "DM Sans", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.blog-content .tiptap.ProseMirror p {
+  margin-top: 1.25rem;
+}
+
+.blog-content .tiptap.ProseMirror p:first-child {
+  margin-top: 0;
 }
