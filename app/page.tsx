@@ -6,7 +6,10 @@ import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
 import About from "@/components/About"
-import { prisma } from "@/lib/prisma";  
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const blogs = await prisma.blog.findMany({
     orderBy: { createdAt: "desc" },
