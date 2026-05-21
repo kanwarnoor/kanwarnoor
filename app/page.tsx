@@ -12,6 +12,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Page() {
   const blogs = await prisma.blog.findMany({
+    where: { visibility: "PUBLIC" },
     orderBy: { createdAt: "desc" },
     select: {
       id: true,

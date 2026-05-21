@@ -6,6 +6,8 @@ import axios from "axios";
 import InfoCard from "@/components/InfoCard";
 import AddBlog from "@/components/admin/AddBlog";
 
+type Visibility = "PUBLIC" | "PRIVATE" | "UNLISTED";
+
 interface Blog {
   id: string;
   title: string;
@@ -13,8 +15,15 @@ interface Blog {
   author: string;
   excerpt: string | null;
   coverImage: string | null;
+  visibility: Visibility;
   createdAt: string;
 }
+
+const visibilityBadge: Record<Visibility, string> = {
+  PUBLIC: "bg-green-500/20 text-green-300 border-green-400/40",
+  UNLISTED: "bg-yellow-500/20 text-yellow-200 border-yellow-400/40",
+  PRIVATE: "bg-red-500/20 text-red-300 border-red-400/40",
+};
 
 type ModalState =
   | { kind: "closed" }
@@ -113,6 +122,11 @@ export default function DashboardPage({ logout }: DashboardProps) {
                   link={`/blog/${blog.slug}`}
                   animation="center"
                 />
+                <span
+                  className={`absolute top-3 left-3 z-10 px-2 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider border backdrop-blur-md ${visibilityBadge[blog.visibility]}`}
+                >
+                  {blog.visibility.toLowerCase()}
+                </span>
                 <button
                   type="button"
                   onClick={(e) => {

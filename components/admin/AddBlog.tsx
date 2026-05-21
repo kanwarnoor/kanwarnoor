@@ -6,6 +6,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { JSONContent } from "@tiptap/react";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 
+type Visibility = "PUBLIC" | "PRIVATE" | "UNLISTED";
+
 interface BlogDetail {
   id: string;
   title: string;
@@ -14,6 +16,7 @@ interface BlogDetail {
   excerpt: string | null;
   content: string;
   coverImage: string | null;
+  visibility: Visibility;
 }
 
 interface AddBlogProps {
@@ -134,6 +137,9 @@ function BlogForm({
   const [title, setTitle] = useState(blog?.title ?? "");
   const [author, setAuthor] = useState(blog?.author ?? "");
   const [excerpt, setExcerpt] = useState(blog?.excerpt ?? "");
+  const [visibility, setVisibility] = useState<Visibility>(
+    blog?.visibility ?? "PRIVATE"
+  );
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -160,6 +166,7 @@ function BlogForm({
       form.append("title", title.trim());
       form.append("author", author.trim());
       form.append("excerpt", excerpt.trim());
+      form.append("visibility", visibility);
       form.append("content", JSON.stringify(contentRef.current));
       if (coverFile) form.append("coverImage", coverFile);
 
@@ -241,6 +248,25 @@ function BlogForm({
           placeholder="Short summary for cards"
           className="w-full p-2 rounded-md border border-white/30 bg-black/30 text-white"
         />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label className="text-sm text-white/70">Visibility</label>
+        <select
+          value={visibility}
+          onChange={(e) => setVisibility(e.target.value as Visibility)}
+          className="w-full p-2 rounded-md border border-white/30 bg-black/30 text-white cursor-pointer"
+        >
+          <option value="PUBLIC" className="bg-back">
+            Public — listed on home page, anyone with the link can view
+          </option>
+          <option value="UNLISTED" className="bg-back">
+            Unlisted — hidden from home, anyone with the link can view
+          </option>
+          <option value="PRIVATE" className="bg-back">
+            Private — hidden everywhere, link does not work
+          </option>
+        </select>
       </div>
 
       <div className="flex flex-col gap-2">

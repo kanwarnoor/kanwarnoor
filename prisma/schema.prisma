@@ -12,6 +12,12 @@ datasource db {
   provider = "postgres"
 }
 
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  UNLISTED
+}
+
 model Blog {
   id         String   @id @default(cuid())
   title      String
@@ -22,6 +28,6 @@ model Blog {
   coverImage String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
+  visibility Visibility @default(PRIVATE)
   @@index([createdAt])
 }

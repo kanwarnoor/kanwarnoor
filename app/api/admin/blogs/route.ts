@@ -1,10 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { Visibility } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { S3_BUCKET, s3Client } from "@/lib/s3";
 import { isAdmin } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
+
+function parseVisibility(raw: string | null | undefined): Visibility | null {
+  if (!raw) return null;
+  const upper = raw.toUpperCase();
+  if (upper === "PUBLIC" || upper === "PRIVATE" || upper === "UNLISTED") {
+    return upper as Visibility;
+  }
+  return null;
+}
 
 function slugify(input: string): string {
   return input
@@ -42,6 +52,7 @@ export async function GET() {
         author: true,
         excerpt: true,
         coverImage: true,
+        visibility: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -66,6 +77,8 @@ export async function POST(req: NextRequest) {
     const author = (form.get("author") as string | null)?.trim();
     const contentRaw = form.get("content") as string | null;
     const excerpt = (form.get("excerpt") as string | null)?.trim() || null;
+    const visibility =
+      parseVisibility(form.get("visibility") as string | null) ?? "PRIVATE";
     const cover = form.get("coverImage");
 
     if (!title || !author || !contentRaw) {
@@ -103,6 +116,7 @@ export async function POST(req: NextRequest) {
         content: contentRaw,
         excerpt,
         coverImage: coverKey,
+        visibility,
       },
     });
 

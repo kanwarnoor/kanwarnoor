@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 export default async function BlogIndexPage() {
   const blogs = await prisma.blog.findMany({
+    where: { visibility: "PUBLIC" },
     orderBy: { createdAt: "desc" },
     select: {
       id: true,

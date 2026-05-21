@@ -34,12 +34,41 @@ export async function generateMetadata({
   const { slug } = await params;
   const blog = await prisma.blog.findUnique({
     where: { slug },
-    select: { title: true, excerpt: true },
+    select: {
+      id: true,
+      title: true,
+      excerpt: true,
+      author: true,
+      coverImage: true,
+      visibility: true,
+      createdAt: true,
+    },
   });
-  if (!blog) return { title: "Not found" };
+  if (!blog || blog.visibility === "PRIVATE") return { title: "Not found" };
+
+  const description = blog.excerpt ?? `By ${blog.author}`;
+  const ogImage = blog.coverImage ? `/api/blogs/${blog.id}/cover` : undefined;
+
   return {
     title: blog.title,
-    description: blog.excerpt ?? undefined,
+    description,
+    authors: [{ name: blog.author }],
+    robots: blog.visibility === "UNLISTED" ? { index: false, follow: false } : undefined,
+    openGraph: {
+      type: "article",
+      title: blog.title,
+      description,
+      url: `/blog/${slug}`,
+      authors: [blog.author],
+      publishedTime: blog.createdAt.toISOString(),
+      images: ogImage ? [{ url: ogImage, alt: blog.title }] : undefined,
+    },
+    twitter: {
+      card: ogImage ? "summary_large_image" : "summary",
+      title: blog.title,
+      description,
+      images: ogImage ? [ogImage] : undefined,
+    },
   };
 }
 
@@ -51,7 +80,7 @@ export default async function BlogPage({
   const { slug } = await params;
 
   const blog = await prisma.blog.findUnique({ where: { slug } });
-  if (!blog) notFound();
+  if (!blog || blog.visibility === "PRIVATE") notFound();
 
   const content = parseContent(blog.content);
 
