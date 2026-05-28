@@ -39,14 +39,12 @@ export default function Button(Props: ButtenProps) {
   return (
     <Link
       href={Props.link || "/"}
-      className={`md:text-base bg-white text-sm font-bold z-40 flex w-fit border-2 rounded-md items-center justify-center ${
-        Props.theme === "dark" ? "text-black" : "text-black"
-      }  px-4 py-2`}
+      className={`md:text-base bg-white/10 backdrop-blur-sm text-sm font-bold z-40 flex w-fit border-2 rounded-md items-center justify-center border-white/10 text-white px-4 py-2`}
     >
       {Props.loading ? (
         <>
           {Props.text || "Know more"}
-          <div className="ml-2 animate-spin rounded-full h-5 w-5 border-black black-spinner"></div>
+          <div className="ml-2 animate-spin rounded-full h-5 w-5 black-spinner"></div>
         </>
       ) : (
         Props.text || "Know more"

@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Transition from "@/components/Transition";
 import { Provider } from "@/context/provider";
 import { Analytics } from "@vercel/analytics/next";
-// import Player from "@/components/Player";
+import Player from "@/components/Player";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +32,9 @@ const oswald = Oswald({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -57,10 +59,10 @@ export default function RootLayout({
         className={`${inter.variable} ${bebas.variable} ${braah.variable} ${oswald.variable} text-white antialiased bg-black`}
       >
         <Provider>
-          {/* <Navbar /> */}
+          {/* <Navbar />  */}
 
           <Loader />
-          {/* <Transition /> */}
+          <Transition />
           <Navbar />
           {/* <Player/> */}
 

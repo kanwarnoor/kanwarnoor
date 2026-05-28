@@ -32,7 +32,7 @@ export default async function Page() {
 
       {/* <Player /> */}
 
-      <section
+      {/* <section
         id="about"
         className="w-full h-screen bg-gradient-to-b bg-back/50 to-back flex flex-row items-center justify-center"
       >
@@ -64,7 +64,7 @@ export default async function Page() {
         className="w-full h-screen bg-white text-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Contact />
-      </section>
+      </section> */}
 
       {/* <section
         id="blog"
@@ -74,10 +74,10 @@ export default async function Page() {
           <Blog />
         </div>
       </section> */}
-
+{/* 
       <section id="footer" className="w-screen h-1/2 flex ">
         <Footer />
-      </section>
+      </section> */}
 
       {/* <div className="w-screen h-screen bg-red-200 text-white flex flex-row items-center justify-center">
         <div className="w-full h-full flex flex-col justify-center items-center ">
