@@ -12,25 +12,25 @@ export default function Transition() {
 
   const [animate, setAnimate] = useState(false);
 
-  useEffect(() => {
-    console.log(route);
-
-    if (route == "") {
-      setAnimate(false);
-      return;
-    }
-
-    setAnimate(true);
-
-    const timeout = setTimeout(() => {
-      setAnimate(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [route]);
-
+  // useEffect(() => {
+  //   console.log(route);
+  //
+  //   if (route == "") {
+  //     setAnimate(false);
+  //     return;
+  //   }
+  //
+  //   setAnimate(true);
+  //
+  //   const timeout = setTimeout(() => {
+  //     setAnimate(false);
+  //   }, 1500);
+  //
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [route]);
+  //
   return (
     <>
       {/* {route !== "/" && ( */}
