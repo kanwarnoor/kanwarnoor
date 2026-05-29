@@ -33,23 +33,22 @@ export default function Transition() {
 
   return (
     <>
-      {route !== "/" && (
-        <AnimatePresence>
-          {animate && (
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: route !== pathname ? "0%" : "-100%" }}
-              transition={{ duration: 0.5 }}
-              exit={{ x: "-100%" }}
-              className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden"
-            >
-              {/* <p className="text-2xl font-bold capitalize">{route.split("/")[1]}</p> */}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
-
-      {route === "/" && (
+      {/* {route !== "/" && ( */}
+      {/*   <AnimatePresence> */}
+      {/*     {animate && ( */}
+      {/*       <motion.div */}
+      {/*         initial={{ x: "100%" }} */}
+      {/*         animate={{ x: route !== pathname ? "0%" : "-100%" }} */}
+      {/*         transition={{ duration: 0.5 }} */}
+      {/*         exit={{ x: "-100%" }} */}
+      {/*         className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden" */}
+      {/*       > */}
+      {/*         {/* <p className="text-2xl font-bold capitalize">{route.split("/")[1]}</p> */}       {/*       </motion.div> */}
+      {/*     )} */}
+      {/*   </AnimatePresence> */}
+      {/* )} */}
+      {/**/}
+      {route == "/#home" && (
         <AnimatePresence>
           <motion.div
             initial={{ scale: 10, opacity: 0 }}

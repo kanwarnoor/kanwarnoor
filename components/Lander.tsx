@@ -36,19 +36,18 @@ export default function Lander() {
             crossOrigin="anonymous"
             poster="/videos/placeholder.webp"
             className="w-full h-full object-cover mix-blend-hard-light britness-200 contrast-200 hue-rotate-180 overflow-hidden"
-            // onLoadStart={() => setVideoLoaded(false)}
-            // onCanPlay={() => setVideoLoaded(true)}
+          // onLoadStart={() => setVideoLoaded(false)}
+          // onCanPlay={() => setVideoLoaded(true)}
           />
-          
+
         </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className={`flex items-center justify-center ${
-            route === "/" ? "gap-5" : "gap-5"
-          }`}
+          className={`flex items-center justify-center ${route === "/" ? "gap-5" : "gap-5"
+            }`}
         >
           <p className="md:text-7xl text-5xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
             N
@@ -77,9 +76,8 @@ export default function Lander() {
                 scale: 1.2,
                 transition: { duration: 0.2, ease: "easeOut" },
               }}
-              className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${
-                route == "/" ? "opacity-0" : "opacity-100"
-              } `}
+              className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${route == "/" ? "opacity-0" : "opacity-100"
+                } `}
             >
               <Image
                 src="/logo/logo-red.webp"
@@ -87,7 +85,7 @@ export default function Lander() {
                 width={0}
                 height={0}
                 sizes="100% 100%"
-                className="flex justify-center w-full h-full items-center  z-50 cursor-pointer "
+                className="flex justify-center w-full h-full items-center  z-10 cursor-pointer "
               />
             </motion.div>
           </AnimatePresence>
