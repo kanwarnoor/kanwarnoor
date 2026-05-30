@@ -59,7 +59,7 @@ export default function Transition() {
               opacity: 0,
               transition: { duration: 0.1, ease: "easeInOut" },
             }}
-            className="w-fit h-fit absolute top-0 left-2 right-0 bottom-[4rem] m-auto z-50 text-white text-center flex items-center justify-center"
+            className="w-fit h-fit absolute top-0 left-2 right-0 bottom-16 m-auto z-50 text-white text-center flex items-center justify-center"
           >
             <motion.div
               initial={{ rotate: 0, scale: 1 }}
@@ -87,6 +87,7 @@ export default function Transition() {
                 width={200}
                 height={200}
                 priority
+                loading="eager"
                 className="flex justify-center items-center  z-10 cursor-pointer "
               />
             </motion.div>

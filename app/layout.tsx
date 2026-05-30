@@ -63,7 +63,7 @@ export default function RootLayout({
 
           {/* <Loader /> */}
           <Transition />
-          <Navbar />
+          {/* <Navbar /> */}
           {/* <Player/> */}
 
           {children}

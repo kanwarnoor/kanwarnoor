@@ -52,44 +52,41 @@ export default function Lander() {
           <p className="md:text-7xl text-5xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
             N
           </p>
-          <AnimatePresence>
-            <motion.div
-              initial={{ rotate: 0, scale: 1 }}
-              animate={{
-                rotate: 360,
-                transition: {
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-              }}
-              exit={{
-                rotate: 0,
-                scale: 1,
-                transition: { duration: 0.1, ease: "easeInOut" },
-              }}
-              whileHover={{
-                scale: 1.1,
-                transition: { duration: 0.2, ease: "easeOut" },
-              }}
-              whileTap={{
-                scale: 1.2,
-                transition: { duration: 0.2, ease: "easeOut" },
-              }}
-              className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${route == "/" ? "opacity-0" : "opacity-100"
-                } `}
-            >
-              <Image
-                src="/logo/logo-red.webp"
-                alt="Lander"
-                width={0}
-                height={0}
-                sizes="100% 100%"
-                className="flex justify-center w-full h-full items-center  z-10 cursor-pointer "
-              />
-            </motion.div>
-          </AnimatePresence>
-
+          {/* <AnimatePresence> */}
+          {/*   <motion.div */}
+          {/*     initial={{ rotate: 0, scale: 1 }} */}
+          {/*     animate={{ */}
+          {/*       rotate: 360, */}
+          {/*       transition: { */}
+          {/*         duration: 5, */}
+          {/*         repeat: Infinity, */}
+          {/*         ease: "easeInOut", */}
+          {/*       }, */}
+          {/*     }} */}
+          {/*     exit={{ */}
+          {/*       rotate: 0, */}
+          {/*       scale: 1, */}
+          {/*       transition: { duration: 0.1, ease: "easeInOut" }, */}
+          {/*     }} */}
+          {/*     whileHover={{ */}
+          {/*       scale: 1.1, */}
+          {/*       transition: { duration: 0.2, ease: "easeOut" }, */}
+          {/*     }} */}
+          {/*     whileTap={{ */}
+          {/*       scale: 1.2, */}
+          {/*       transition: { duration: 0.2, ease: "easeOut" }, */}
+          {/*     }} className={`z-10 md:mt-6 mt-4 md:w-48 w-32 ${route == "/" ? "opacity-0" : "opacity-100" } `} > */}
+          {/*     <Image */}
+          {/*       src="/logo/logo-red.webp" */}
+          {/*       alt="Lander" */}
+          {/*       width={0} */}
+          {/*       height={0} */}
+          {/*       sizes="100% 100%" */}
+          {/*       className="flex justify-center w-full h-full items-center  z-10 cursor-pointer " */}
+          {/*     /> */}
+          {/*   </motion.div> */}
+          {/* </AnimatePresence> */}
+          {/**/}
           <p className="md:text-7xl text-5xl transform font-oswald scale-y-[300%] scale-x-[200%] font-extrabold drop-shadow-[0_0_1px_rgba(255,255,255,1)] drop-shadow-white flex justify-center items-center">
             R
           </p>
