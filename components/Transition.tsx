@@ -1,69 +1,58 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { RouteContext } from "@/context/routeContext";
+import React, { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function Transition() {
   const pathname = usePathname();
-  const { route } = useContext(RouteContext);
 
+  const isFirstLoad = useRef(true);
   const [animate, setAnimate] = useState(false);
 
-  // useEffect(() => {
-  //   console.log(route);
-  //
-  //   if (route == "") {
-  //     setAnimate(false);
-  //     return;
-  //   }
-  //
-  //   setAnimate(true);
-  //
-  //   const timeout = setTimeout(() => {
-  //     setAnimate(false);
-  //   }, 1500);
-  //
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [route]);
-  //
+  useEffect(() => {
+    if (pathname === "/") {
+      setAnimate(false);
+      return;
+    }
+
+    setAnimate(true);
+
+    const timeout = setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [pathname]);
+
   return (
     <>
+      <AnimatePresence mode="wait">
+        {animate && pathname !== "/" && (
+          <motion.div
+            key={pathname}
+            initial={{ x: "100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.5 }}
+            className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden"
+          />
+        )}
+      </AnimatePresence>
 
-    
-{route !== "/" && (
-  <AnimatePresence>
-    {animate && (
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: route !== pathname ? "0%" : "-100%" }}
-        exit={{ x: "-100%" }}
-        transition={{ duration: 0.5 }}
-        className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden"
-      >
-        {/* <p className="text-2xl font-bold capitalize">
-          {route.split("/")[1]}
-        </p> */}
-      </motion.div>
-    )}
-  </AnimatePresence>
-)}
-   
       {pathname === "/" && (
         <AnimatePresence>
           <motion.div
             initial={{ scale: 10, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut", delay: 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut", delay: isFirstLoad.current ? 1 : 0 }}
             exit={{
               scale: 1,
               opacity: 0,
               transition: { duration: 0.1, ease: "easeInOut" },
             }}
+            onAnimationComplete={() => { isFirstLoad.current = false; }}
             className="w-fit h-fit absolute -top-2 -left-1 right-0 bottom-16 m-auto z-50 text-white text-center flex items-center justify-center"
           >
             <motion.div
@@ -74,7 +63,7 @@ export default function Transition() {
                   duration: 5,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  
+
                 },
               }}
               whileHover={{
@@ -100,10 +89,6 @@ export default function Transition() {
           </motion.div>
         </AnimatePresence>
       )}
-
-      {/* <div className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center">
-        <p className="text-2xl font-bold">{route || pathname}</p>
-      </div> */}
     </>
   );
 }

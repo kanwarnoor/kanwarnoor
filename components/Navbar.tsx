@@ -1,49 +1,26 @@
 "use client";
 
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useMemo } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { RouteContext } from "@/context/routeContext";
 import { motion } from "framer-motion";
 import { LoadingContext } from "@/context/loadingContext";
-
-type NavTheme = "light" | "dark";
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [showAdmin, setShowAdmin] = useState(false);
-
-  useEffect(() => {
-    if (pathname?.startsWith("/admin")) {
-      setShowAdmin(true);
-    } else {
-      setShowAdmin(false);
-    }
-  }, [pathname]);
+  const showAdmin = pathname?.startsWith("/admin") ?? false;
 
   const links = useMemo(
     () => [
-      { name: "Home", hrefPC: "/#home", hrefMobile: "/#home", timeout: 0 },
-      { name: "About", hrefPC: "/about", hrefMobile: "/#about", timeout: 0 },
-      { name: "Projects", hrefPC: "/projects", hrefMobile: "/#projects", timeout: 500 },
-      { name: "Skills", hrefPC: "/skills", hrefMobile: "/#skills", timeout: 500 },
-      {
-        name: "Blog",
-        hrefPC: "/blog",
-        hrefMobile: "/#blog",
-        timeout: 500,
-      },
-      { name: "Contact", hrefPC: "/contact", hrefMobile: "/#contact", timeout: 500 },
-    
-      // {
-      //   name: "Admin",
-      //   hrefPC: "/admin",
-      //   hrefMobile: "/admin",
-      //   timeout: 500,
-      // },
+      { name: "Home", href: "/" },
+      { name: "About", href: "/about" },
+      { name: "Projects", href: "/projects" },
+      { name: "Skills", href: "/skills" },
+      { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
     ],
     []
   );
@@ -51,54 +28,13 @@ export default function Navbar() {
   const { setRoute } = useContext(RouteContext);
   const { loading } = useContext(LoadingContext);
 
-  const [activeSection, setActiveSection] = useState<string>("home");
-  const [theme, setTheme] = useState<NavTheme>("dark");
-  const ratiosRef = useRef<Map<string, number>>(new Map());
+  const activeLink = links.find((link) =>
+    link.href === "/"
+      ? pathname === "/"
+      : pathname?.startsWith(link.href)
+  )?.href;
 
-  useEffect(() => {
-    if (showAdmin || loading) return;
-
-    const ids = links.map((l) => l.hrefPC.replace("/#", ""));
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => !!el);
-
-    if (elements.length === 0) return;
-
-    const ratios = ratiosRef.current;
-    elements.forEach((el) => ratios.set(el.id, 0));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          ratios.set(entry.target.id, entry.intersectionRatio);
-        });
-
-        let bestId = "";
-        let bestRatio = 0;
-        ratios.forEach((r, id) => {
-          if (r > bestRatio) {
-            bestRatio = r;
-            bestId = id;
-          }
-        });
-
-        if (bestId && bestRatio > 0) {
-          setActiveSection(bestId);
-          const el = document.getElementById(bestId);
-          const declared = el?.dataset.theme as NavTheme | undefined;
-          setTheme(declared === "light" ? "light" : "dark");
-          setRoute(`/#${bestId}`);
-        }
-      },
-      { threshold: Array.from({ length: 11 }, (_, i) => i * 0.1) }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [showAdmin, loading, links, setRoute]);
-
-  const isLight = theme === "light";
+  const isLight = false;
 
   const shellClass = isLight
     ? "border-black/10 bg-white/40 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6),0_8px_32px_0_rgba(0,0,0,0.12)]"
@@ -122,7 +58,7 @@ export default function Navbar() {
       <div
         className=" fixed top-0 m-5 z-40 flex cursor-pointer"
         onClick={() => {
-          setRoute("/#home");
+          setRoute("/");
           router.push("/");
         }}
       >
@@ -145,14 +81,13 @@ export default function Navbar() {
 
             <ul className="relative flex items-center gap-1 text-sm font-medium">
               {links.map((link) => {
-                const id = link.hrefPC.replace("/#", "");
-                const isActive = id === activeSection;
+                const isActive = link.href === activeLink;
                 return (
                   <li key={link.name} className="relative">
                     <button
                       onClick={() => {
-                        setRoute(link.hrefPC);
-                        router.push(link.hrefPC);
+                        setRoute(link.href);
+                        router.push(link.href);
                       }}
                       className={`relative px-5 py-2 rounded-full transition-colors duration-300 ${
                         isActive ? textActive : textInactive

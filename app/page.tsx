@@ -26,19 +26,12 @@ export default async function Page() {
   });
   return (
     <>
-     <section id="home" className="w-full h-screen overflow-hidden">
-        <Lander /> 
-     </section> 
-  
-      {/* <Player /> */}
-
-      {/* <section
-        id="about"
-        className="w-full h-screen bg-gradient-to-b bg-back/50 to-back flex flex-row items-center justify-center"
-      >
-        <About />
+      <section id="home" className="w-full h-screen overflow-hidden">
+        <Lander />
       </section>
 
+      {/* <Player /> */}
+      {/*
       <section
         id="projects"
         className="w-full h-screen bg-back flex flex-row items-center justify-center"
