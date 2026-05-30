@@ -27,16 +27,16 @@ export default function Navbar() {
   const links = useMemo(
     () => [
       { name: "Home", hrefPC: "/#home", hrefMobile: "/#home", timeout: 0 },
-      { name: "About", hrefPC: "/#about", hrefMobile: "/#about", timeout: 0 },
-      { name: "Projects", hrefPC: "/#projects", hrefMobile: "/#projects", timeout: 500 },
-      { name: "Skills", hrefPC: "/#skills", hrefMobile: "/#skills", timeout: 500 },
+      { name: "About", hrefPC: "/about", hrefMobile: "/#about", timeout: 0 },
+      { name: "Projects", hrefPC: "/projects", hrefMobile: "/#projects", timeout: 500 },
+      { name: "Skills", hrefPC: "/skills", hrefMobile: "/#skills", timeout: 500 },
       {
         name: "Blog",
-        hrefPC: "/#blog",
+        hrefPC: "/blog",
         hrefMobile: "/#blog",
         timeout: 500,
       },
-      { name: "Contact", hrefPC: "/#contact", hrefMobile: "/#contact", timeout: 500 },
+      { name: "Contact", hrefPC: "/contact", hrefMobile: "/#contact", timeout: 500 },
     
       // {
       //   name: "Admin",

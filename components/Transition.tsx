@@ -33,33 +33,38 @@ export default function Transition() {
   //
   return (
     <>
-      {/* {route !== "/" && ( */}
-      {/*   <AnimatePresence> */}
-      {/*     {animate && ( */}
-      {/*       <motion.div */}
-      {/*         initial={{ x: "100%" }} */}
-      {/*         animate={{ x: route !== pathname ? "0%" : "-100%" }} */}
-      {/*         transition={{ duration: 0.5 }} */}
-      {/*         exit={{ x: "-100%" }} */}
-      {/*         className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden" */}
-      {/*       > */}
-      {/*         {/* <p className="text-2xl font-bold capitalize">{route.split("/")[1]}</p> */}       {/*       </motion.div> */}
-      {/*     )} */}
-      {/*   </AnimatePresence> */}
-      {/* )} */}
-      {/**/}
-      {route == "/#home" && (
+
+    
+{route !== "/" && (
+  <AnimatePresence>
+    {animate && (
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: route !== pathname ? "0%" : "-100%" }}
+        exit={{ x: "-100%" }}
+        transition={{ duration: 0.5 }}
+        className="w-screen h-screen absolute top-0 left-0 bg-front z-50 text-white text-center flex items-center justify-center overflow-hidden"
+      >
+        {/* <p className="text-2xl font-bold capitalize">
+          {route.split("/")[1]}
+        </p> */}
+      </motion.div>
+    )}
+  </AnimatePresence>
+)}
+   
+      {pathname === "/" && (
         <AnimatePresence>
           <motion.div
             initial={{ scale: 10, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut", delay: 1 }}
             exit={{
               scale: 1,
               opacity: 0,
               transition: { duration: 0.1, ease: "easeInOut" },
             }}
-            className="w-fit h-fit absolute top-0 left-2 right-0 bottom-16 m-auto z-50 text-white text-center flex items-center justify-center"
+            className="w-fit h-fit absolute -top-2 -left-1 right-0 bottom-16 m-auto z-50 text-white text-center flex items-center justify-center"
           >
             <motion.div
               initial={{ rotate: 0, scale: 1 }}
@@ -69,6 +74,7 @@ export default function Transition() {
                   duration: 5,
                   repeat: Infinity,
                   ease: "easeInOut",
+                  
                 },
               }}
               whileHover={{
@@ -79,7 +85,7 @@ export default function Transition() {
                 scale: 1.2,
                 transition: { duration: 0.2, ease: "easeOut" },
               }}
-              className="z-10 md:mt-6 mt-4 md:w-48 w-32"
+              className="z-10  md:mt-6 mt-4 md:w-48 w-32"
             >
               <Image
                 src="/logo/logo-red.webp"

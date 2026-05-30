@@ -26,10 +26,10 @@ export default async function Page() {
   });
   return (
     <>
-      {/* <section id="home" className="w-full h-screen overflow-hidden"> */}
-      {/*   <Lander /> */}
-      {/* </section> */}
-      {/**/}
+     <section id="home" className="w-full h-screen overflow-hidden">
+        <Lander /> 
+     </section> 
+  
       {/* <Player /> */}
 
       {/* <section
