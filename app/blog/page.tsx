@@ -27,6 +27,8 @@ export default async function BlogIndexPage() {
   });
 
   return (
-    <Blog blogs={blogs} />  
+    <section className="w-full min-h-screen bg-back text-white flex flex-row items-center justify-center overflow-hidden">
+      <Blog blogs={blogs} />
+    </section>
   );
 }

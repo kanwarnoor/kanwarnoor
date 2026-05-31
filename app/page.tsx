@@ -31,52 +31,46 @@ export default async function Page() {
       </section>
 
       {/* <Player /> */}
-      {/*
       <section
         id="projects"
-        className="w-full h-screen bg-back flex flex-row items-center justify-center"
+        className="w-full md:hidden flex h-screen bg-back flex-row items-center justify-center"
+      >
+        <About />
+      </section>
+
+
+      <section
+        id="projects"
+        className="w-full md:hidden flex h-screen bg-back flex-row items-center justify-center"
       >
         <Projects />
       </section>
 
       <section
         id="skills"
-        className="w-full h-screen  bg-black flex flex-row items-center justify-center overflow-hidden"
+        className="w-full h-screen flex md:hidden bg-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Skills />
       </section>
       <section
         id="blog"
-        className="w-full h-screen  bg-black flex flex-row items-center justify-center overflow-hidden"
-      > 
+        className="w-full h-screen flex md:hidden  bg-back flex flex-row items-center justify-center overflow-hidden"
+      >
         <Blog blogs={blogs} />
       </section>
 
       <section
         id="contact"
-        className="w-full h-screen bg-white text-black flex flex-row items-center justify-center overflow-hidden"
+        className="w-full h-screen flex md:hidden bg-white text-black flex flex-row items-center justify-center overflow-hidden"
       >
         <Contact />
-      </section> */}
+      </section>
 
-      {/* <section
-        id="blog"
-        className="w-full h-screen  bg-black flex flex-row items-center justify-center"
-      >
-        <div className="w-full h-full flex flex-col justify-center items-center ">
-          <Blog />
-        </div>
-      </section> */}
-      {/* 
-      <section id="footer" className="w-screen h-1/2 flex ">
+      <section id="footer" className="w-screen h-1/2 flex md:hidden ">
         <Footer />
-      </section> */}
+      </section>
 
-      {/* <div className="w-screen h-screen bg-red-200 text-white flex flex-row items-center justify-center">
-        <div className="w-full h-full flex flex-col justify-center items-center ">
-          <p>Footer</p>
-        </div>
-      </div> */}
+
     </>
   );
 }
