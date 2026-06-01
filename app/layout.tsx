@@ -4,6 +4,7 @@ import "./globals.css";
 import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Transition from "@/components/Transition";
+import ScrollNavigator from "@/components/ScrollNavigator";
 import { Provider } from "@/context/provider";
 import { Analytics } from "@vercel/analytics/next";
 import Player from "@/components/Player";
@@ -64,6 +65,7 @@ export default function RootLayout({
           <Loader />
           <Transition />
           <Navbar />
+          <ScrollNavigator />
           {/* <Player/> */}
 
           {children}

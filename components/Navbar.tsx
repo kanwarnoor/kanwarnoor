@@ -25,7 +25,7 @@ export default function Navbar() {
     []
   );
 
-  const { setRoute } = useContext(RouteContext);
+  const { setRoute, setPendingRoute } = useContext(RouteContext);
   const { loading } = useContext(LoadingContext);
 
   const activeLink = links.find((link) =>
@@ -59,7 +59,7 @@ export default function Navbar() {
         className=" fixed top-0 m-5 z-40 flex cursor-pointer"
         onClick={() => {
           setRoute("/");
-          router.push("/");
+          setPendingRoute("/");
         }}
       >
         <Image src="/logo/logo-white.webp" alt="logo" width={35} height={35} />
@@ -87,11 +87,10 @@ export default function Navbar() {
                     <button
                       onClick={() => {
                         setRoute(link.href);
-                        router.push(link.href);
+                        setPendingRoute(link.href);
                       }}
-                      className={`relative px-5 py-2 rounded-full transition-colors duration-300 ${
-                        isActive ? textActive : textInactive
-                      }`}
+                      className={`relative cursor-pointer px-5 py-2 rounded-full transition-colors duration-300 ${isActive ? textActive : textInactive
+                        }`}
                     >
                       {isActive && (
                         <motion.span

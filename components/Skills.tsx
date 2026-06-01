@@ -111,7 +111,7 @@ export default function Skills() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <div className=" w-screen h-screen overflow-hidden flex flex-row-reverse items-center justify-center">
+    <div className=" w-screen h-screen overflow-hidden relative flex flex-row-reverse items-center justify-center">
       {/* <div className="flex flex-col items-center justify-center">
         <div className="w-fit h-fit mr-auto pr-4 flex flex-row gap-2 justify-center items-center">
           {Array.from({ length: 5 }).map((_, index) => {
