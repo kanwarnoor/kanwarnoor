@@ -100,7 +100,7 @@ export default function Transition() {
 
       {pathname === "/" && (
         <AnimatePresence>
-          <div className="fixed inset-0 overflow-hidden z-50 pointer-events-none">
+          <div className="fixed inset-0 overflow-hidden z-50 pointer-events-none md:flex hidden">
             <motion.div
               initial={{ scale: 10, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
