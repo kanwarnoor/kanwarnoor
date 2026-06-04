@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import InfoCard from "./InfoCard";
 import useEmblaCarousel from "embla-carousel-react";
-import { div } from "framer-motion/client";
+import { div, i } from "framer-motion/client";
 
 export default function Projects() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -23,6 +23,7 @@ export default function Projects() {
       animation: "center",
       link: "https://remaster.in/",
       tags: ["all", "personal"],
+      type: ["web", "app"],
     },
     {
       title: "Ardent Co.",
@@ -31,6 +32,7 @@ export default function Projects() {
       link: "https://ardentco.in/",
       animation: "center",
       tags: ["all", "client"],
+      type: ["web"],
     },
     {
       title: "Rhetor",
@@ -39,6 +41,7 @@ export default function Projects() {
       link: "https://rhetor.in/",
       animation: "center",
       tags: ["all", "client"],
+      type: ["web"],
     },
     {
       title: "Guru Nanak Dev University",
@@ -47,6 +50,7 @@ export default function Projects() {
       animation: "center",
       link: "https://university-verka.vercel.app/",
       tags: ["all", "client", "collaboration"],
+      type: ["web"],
     },
     {
       title: "Fullscreen",
@@ -55,6 +59,7 @@ export default function Projects() {
       link: "https://fullscreen.remaster.in/",
       animation: "center",
       tags: ["all", "personal"],
+      type: ["web"],
     },
     {
       title: "UK India Business Council",
@@ -62,6 +67,7 @@ export default function Projects() {
       image: "/images/projects/ukindia.webp",
       link: "https://www.ukibc.com/",
       animation: "center",
+      type: ["web"],
       tags: ["all", "client"],
     },
   ];
@@ -155,7 +161,7 @@ export default function Projects() {
                         return { ...item, active: true };
                       }
                       return { ...item, active: false };
-                    })
+                    }),
                   )
                 }
               >
@@ -184,7 +190,7 @@ export default function Projects() {
         className="overflow-hidden flex flex-col mr-auto pl-10 "
         ref={emblaRef}
       >
-        <div className="flex flex-row gap-10 w-[100vw] py-1 ">
+        <div className="flex flex-row gap-10 w-[100vw] pt-1 pb-6 ">
           {filteredData.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -205,6 +211,7 @@ export default function Projects() {
                   image={item.image}
                   link={item.link}
                   animation={"center"}
+                  type={item.type}
                 />
               </div>
             );
