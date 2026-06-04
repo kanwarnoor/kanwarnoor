@@ -5,12 +5,18 @@ import { usePathname } from "next/navigation";
 import { RouteContext } from "@/context/routeContext";
 
 const LINKS = ["/", "/about", "/projects", "/skills", "/blog", "/contact"];
-const COOLDOWN_MS = 1000;
+// How long the scroll must be idle after a navigation before the next one is
+// allowed. The timer resets on every wheel event, so a single momentum/inertial
+// scroll (trackpad or mouse) counts as one gesture and can't skip routes.
+const COOLDOWN_MS = 600;
+// Ignore tiny deltas so trackpad jitter doesn't trigger navigation.
+const DELTA_THRESHOLD = 8;
 
 export default function ScrollNavigator() {
   const pathname = usePathname();
   const { setPendingRoute } = useContext(RouteContext);
   const cooldown = useRef(false);
+  const cooldownTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathnameRef = useRef(pathname);
 
   useEffect(() => {
@@ -19,8 +25,19 @@ export default function ScrollNavigator() {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (cooldown.current) return;
       if (pathnameRef.current?.startsWith("/admin")) return;
+      if (Math.abs(e.deltaY) < DELTA_THRESHOLD) return;
+
+      // Keep pushing the cooldown release forward while wheel events keep
+      // arriving (momentum scrolling). The cooldown only clears once the
+      // gesture has been idle for COOLDOWN_MS.
+      if (cooldown.current) {
+        if (cooldownTimer.current) clearTimeout(cooldownTimer.current);
+        cooldownTimer.current = setTimeout(() => {
+          cooldown.current = false;
+        }, COOLDOWN_MS);
+        return;
+      }
 
       const current = pathnameRef.current ?? "/";
       const idx = LINKS.indexOf(current);
@@ -31,11 +48,16 @@ export default function ScrollNavigator() {
 
       cooldown.current = true;
       setPendingRoute(next);
-      setTimeout(() => { cooldown.current = false; }, COOLDOWN_MS);
+      cooldownTimer.current = setTimeout(() => {
+        cooldown.current = false;
+      }, COOLDOWN_MS);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      if (cooldownTimer.current) clearTimeout(cooldownTimer.current);
+    };
   }, [setPendingRoute]);
 
   return null;
