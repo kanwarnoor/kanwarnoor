@@ -17,13 +17,13 @@ export default function Projects() {
 
   const data = [
     {
-      title: "Remaster",
-      des: "A platform for artists to store and sell their music",
-      image: "/images/projects/remaster.webp",
+      title: "UK India Business Council",
+      des: "Client work Website for UK India Business Council",
+      image: "/images/projects/ukindia.webp",
+      link: "https://www.ukibc.com/",
       animation: "center",
-      link: "https://remaster.in/",
-      tags: ["all", "personal"],
-      type: ["web", "app"],
+      type: ["web"],
+      tags: ["all", "client"],
     },
     {
       title: "Ardent Co.",
@@ -33,6 +33,15 @@ export default function Projects() {
       animation: "center",
       tags: ["all", "client"],
       type: ["web"],
+    },
+    {
+      title: "Remaster",
+      des: "A platform for artists to store and sell their music",
+      image: "/images/projects/remaster.webp",
+      animation: "center",
+      link: "https://remaster.in/",
+      tags: ["all", "personal"],
+      type: ["web", "app"],
     },
     {
       title: "Rhetor",
@@ -60,15 +69,6 @@ export default function Projects() {
       animation: "center",
       tags: ["all", "personal"],
       type: ["web"],
-    },
-    {
-      title: "UK India Business Council",
-      des: "Client work Website for UK India Business Council",
-      image: "/images/projects/ukindia.webp",
-      link: "https://www.ukibc.com/",
-      animation: "center",
-      type: ["web"],
-      tags: ["all", "client"],
     },
   ];
 
