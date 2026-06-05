@@ -32,6 +32,13 @@ export default function Transition() {
       return;
     }
 
+    // Navigating to the home page: skip the slide overlay entirely.
+    if (pendingRoute === "/") {
+      router.push(pendingRoute);
+      setPendingRoute(null);
+      return;
+    }
+
     const from = ORDER.indexOf(pathname ?? "/");
     const to = ORDER.indexOf(pendingRoute);
     // Going to a lower index (e.g. back to Home) = backward; otherwise forward.
@@ -41,7 +48,7 @@ export default function Transition() {
     pushedRef.current = false;
     setPhase("covering");
     setPendingRoute(null); // consumed — target is held in the ref
-  }, [pendingRoute, pathname, setPendingRoute]);
+  }, [pendingRoute, pathname, setPendingRoute, router]);
 
   // Step 2: once the destination page is actually mounted, reveal it.
   useEffect(() => {
@@ -93,7 +100,7 @@ export default function Transition() {
 
       {pathname === "/" && (
         <AnimatePresence>
-          <div className="fixed inset-0 overflow-hidden z-50 pointer-events-none">
+          <div className="fixed inset-0 overflow-hidden z-50 pointer-events-none md:flex hidden">
             <motion.div
               initial={{ scale: 10, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
