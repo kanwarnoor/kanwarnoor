@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import InfoCard from "./InfoCard";
 import useEmblaCarousel from "embla-carousel-react";
-import { div } from "framer-motion/client";
+import { div, i } from "framer-motion/client";
 
 export default function Projects() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -21,9 +21,9 @@ export default function Projects() {
       des: "A platform for artists to store and sell their music",
       image: "/images/projects/remaster.webp",
       animation: "center",
-      type: ["web"],
-      tags: ["all", "client"],
-      content: `this is some randome text`,
+      link: "https://remaster.in/",
+      tags: ["all", "personal"],
+      type: ["web", "app"],
     },
     {
       title: "Ardent Co.",
@@ -32,6 +32,7 @@ export default function Projects() {
       link: "https://ardentco.in/",
       animation: "center",
       tags: ["all", "client"],
+      type: ["web"],
     },
     {
       title: "Rhetor",
@@ -40,6 +41,7 @@ export default function Projects() {
       link: "https://rhetor.in/",
       animation: "center",
       tags: ["all", "client"],
+      type: ["web"],
     },
     {
       title: "Guru Nanak Dev University",
@@ -48,6 +50,7 @@ export default function Projects() {
       animation: "center",
       link: "https://university-verka.vercel.app/",
       tags: ["all", "client", "collaboration"],
+      type: ["web"],
     },
     {
       title: "Fullscreen",
@@ -56,6 +59,7 @@ export default function Projects() {
       link: "https://fullscreen.remaster.in/",
       animation: "center",
       tags: ["all", "personal"],
+      type: ["web"],
     },
     {
       title: "UK India Business Council",
@@ -63,6 +67,7 @@ export default function Projects() {
       image: "/images/projects/ukindia.webp",
       link: "https://www.ukibc.com/",
       animation: "center",
+      type: ["web"],
       tags: ["all", "client"],
     },
   ];
