@@ -26,7 +26,6 @@ export default function InfoCard({
   const [clicked, setClicked] = useState(false);
 
   return (
-<<<<<<< Updated upstream
     <motion.div
       initial={{
         opacity: 0,
@@ -76,63 +75,6 @@ export default function InfoCard({
               alt="Saturn Roman"
               className={`w-full h-full object-cover object-center duration-300 rounded-2xl `}
             ></Image>
-=======
-    <div className="relative w-fit">
-      <motion.div
-        initial={{
-          opacity: 0,
-          x:
-            animation == "left" ? "-10%" : animation === "center" ? "0" : "10%",
-          y: animation == "center" ? "10%" : "0%",
-        }}
-        animate={{
-          transition: {
-            duration: 0.5,
-          },
-        }}
-        whileHover={{
-          scale: 1.02,
-        }}
-        whileInView={{
-          opacity: 1,
-          x: 0,
-          y: 0,
-          transition: {
-            duration: 0.5,
-          },
-        }}
-        transition={{
-          duration: 0.1,
-        }}
-        // viewport={{
-        //   amount: 0.3,
-        // }}
-        // onClick={() => setClicked1((clicked1) => !clicked1)}
-        className="relative flex flex-col cursor-pointer 2xl:w-[711.11px] xl:w-[533.33px] shadow-xl 2xl:h-[400px] xl:h-[300px] w-[300px] h-[350px] bg-black/50 backdrop-blur-xl rounded-2xl"
-      >
-        {!clicked && (
-          <div
-            className="flex flex-col bg-black/50 backdrop-blur-xl h-full rounded-2xl"
-            onClick={() => {
-              if (description) {
-                setClicked((clicked) => !clicked);
-              } else if (link) {
-                window.open(link, "_blank");
-              }
-            }}
-          >
-            <div
-              className={`relative w-full duration-300 rounded-t-2xl h-full`}
-            >
-              <Image
-                src={image}
-                width={0}
-                height={0}
-                sizes="100% 100%"
-                alt="Saturn Roman"
-                className={`w-full h-full object-cover object-center duration-300 rounded-2xl `}
-              ></Image>
->>>>>>> Stashed changes
 
             <div
               className="absolute bottom-0 left-0 w-full h-1/2 pointer-events-none 
