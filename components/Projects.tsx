@@ -17,6 +17,24 @@ export default function Projects() {
 
   const data = [
     {
+      title: "UK India Business Council",
+      des: "Client work Website for UK India Business Council",
+      image: "/images/projects/ukindia.webp",
+      link: "https://www.ukibc.com/",
+      animation: "center",
+      type: ["web"],
+      tags: ["all", "client"],
+    },
+     {
+      title: "Ardent Co.",
+      des: "Dynamic communications, research, and public policy advisory firm",
+      image: "/images/projects/ardent.webp",
+      link: "https://ardentco.in/",
+      animation: "center",
+      tags: ["all", "client"],
+      type: ["web"],
+    },   
+    {
       title: "Remaster",
       des: "A platform for artists to store and sell their music",
       image: "/images/projects/remaster.webp",
@@ -25,15 +43,7 @@ export default function Projects() {
       tags: ["all", "personal"],
       type: ["web", "app"],
     },
-    {
-      title: "Ardent Co.",
-      des: "Dynamic communications, research, and public policy advisory firm",
-      image: "/images/projects/ardent.webp",
-      link: "https://ardentco.in/",
-      animation: "center",
-      tags: ["all", "client"],
-      type: ["web"],
-    },
+
     {
       title: "Rhetor",
       des: "Content and creator agency that pairs thoughtful strategy with high-impact execution.",
@@ -60,15 +70,6 @@ export default function Projects() {
       animation: "center",
       tags: ["all", "personal"],
       type: ["web"],
-    },
-    {
-      title: "UK India Business Council",
-      des: "Client work Website for UK India Business Council",
-      image: "/images/projects/ukindia.webp",
-      link: "https://www.ukibc.com/",
-      animation: "center",
-      type: ["web"],
-      tags: ["all", "client"],
     },
   ];
 
