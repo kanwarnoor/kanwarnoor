@@ -64,11 +64,13 @@ export default function InfoCard({
         {!clicked && (
           <div
             className="flex flex-col bg-black/50 backdrop-blur-xl h-full rounded-2xl"
-            onClick={() =>
-              description
-                ? setClicked((clicked) => !clicked)
-                : window.open(link, "_ blank")
-            }
+            onClick={() => {
+              if (description) {
+                setClicked((clicked) => !clicked);
+              } else if (link) {
+                window.open(link, "_blank");
+              }
+            }}
           >
             <div
               className={`relative w-full duration-300 rounded-t-2xl h-full`}

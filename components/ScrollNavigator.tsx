@@ -14,17 +14,23 @@ const DELTA_THRESHOLD = 8;
 
 export default function ScrollNavigator() {
   const pathname = usePathname();
-  const { setPendingRoute } = useContext(RouteContext);
+  const { setPendingRoute, navLocked } = useContext(RouteContext);
   const cooldown = useRef(false);
   const cooldownTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathnameRef = useRef(pathname);
+  const navLockedRef = useRef(navLocked);
 
   useEffect(() => {
     pathnameRef.current = pathname;
   }, [pathname]);
 
   useEffect(() => {
+    navLockedRef.current = navLocked;
+  }, [navLocked]);
+
+  useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      if (navLockedRef.current) return;
       if (pathnameRef.current?.startsWith("/admin")) return;
       if (Math.abs(e.deltaY) < DELTA_THRESHOLD) return;
 
