@@ -27,7 +27,6 @@ export default function Projects() {
       type: ["web"],
       tags: ["all", "client"],
       index: 1,
-      content: "hello baby",
     },
     {
       title: "Ardent Co.",
@@ -78,6 +77,7 @@ export default function Projects() {
       tags: ["all", "personal"],
       type: ["web"],
       index: 6,
+      content: "testing, please ignore"
     },
   ];
 
@@ -238,6 +238,7 @@ export default function Projects() {
                       // transition={{ type: "spring", stiffness: 350, damping: 30 }}
                       className="flex flex-col "
                       onClick={() =>
+                        item.content &&
                         setContent({
                           active: true,
                           index: item.index,
