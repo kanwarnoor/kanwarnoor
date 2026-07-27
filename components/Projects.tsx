@@ -27,6 +27,7 @@ export default function Projects() {
       type: ["web"],
       tags: ["all", "client"],
       index: 1,
+      content: "A",
     },
     {
       title: "Ardent Co.",
@@ -37,6 +38,7 @@ export default function Projects() {
       tags: ["all", "client"],
       type: ["web"],
       index: 2,
+      content: "A",
     },
     {
       title: "Remaster",
@@ -47,6 +49,7 @@ export default function Projects() {
       tags: ["all", "personal"],
       type: ["web", "app"],
       index: 3,
+      content: "A",
     },
     {
       title: "Rhetor",
@@ -57,6 +60,7 @@ export default function Projects() {
       tags: ["all", "client"],
       type: ["web"],
       index: 4,
+      content: "A",
     },
     {
       title: "Guru Nanak Dev University",
@@ -67,6 +71,7 @@ export default function Projects() {
       tags: ["all", "client", "collaboration"],
       type: ["web"],
       index: 5,
+      content: "A",
     },
     {
       title: "Fullscreen",
@@ -77,7 +82,7 @@ export default function Projects() {
       tags: ["all", "personal"],
       type: ["web"],
       index: 6,
-      content: "testing, please ignore"
+      content: "A",
     },
   ];
 
@@ -428,6 +433,31 @@ export default function Projects() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: "90%", y: -10 }}
+            animate={{ opacity: 1, scale: "100%", y: 0 }}
+            whileHover={{
+              scale: "110%",
+            }}
+            className="absolute left-1/2 -translate-x-1/2 z-50 bottom-10 cursor-pointer border-white/20 border-1 bg-white/10 backdrop-blur-sm flex flex-row justify-center items-center px-3 py-2 w-fit rounded-full gap-2"
+            onClick={() => window.open(data[content.index - 1].link, "_blank")}
+          >
+            Check it out
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
               />
             </svg>
           </motion.div>

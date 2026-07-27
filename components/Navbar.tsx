@@ -22,16 +22,14 @@ export default function Navbar() {
       { name: "Blog", href: "/blog" },
       { name: "Contact", href: "/contact" },
     ],
-    []
+    [],
   );
 
-  const { setRoute, setPendingRoute } = useContext(RouteContext);
+  const { setRoute, setPendingRoute, navLocked } = useContext(RouteContext);
   const { loading } = useContext(LoadingContext);
 
   const activeLink = links.find((link) =>
-    link.href === "/"
-      ? pathname === "/"
-      : pathname?.startsWith(link.href)
+    link.href === "/" ? pathname === "/" : pathname?.startsWith(link.href),
   )?.href;
 
   const isLight = false;
@@ -56,7 +54,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className=" fixed top-0 m-5 z-40 flex cursor-pointer"
+        className={` fixed top-0 m-5 z-40 flex cursor-pointer transition-opacity duration-300 ${navLocked ? "opacity-0 pointer-events-none" : "opacity-100"}`}
         onClick={() => {
           setRoute("/");
           setPendingRoute("/");
@@ -65,7 +63,7 @@ export default function Navbar() {
         <Image src="/logo/logo-white.webp" alt="logo" width={35} height={35} />
       </div>
 
-      {!showAdmin && !loading && (
+      {!showAdmin && !loading && !navLocked && (
         <motion.nav
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,14 +87,19 @@ export default function Navbar() {
                         setRoute(link.href);
                         setPendingRoute(link.href);
                       }}
-                      className={`relative cursor-pointer px-5 py-2 rounded-full transition-colors duration-300 ${isActive ? textActive : textInactive
-                        }`}
+                      className={`relative cursor-pointer px-5 py-2 rounded-full transition-colors duration-300 ${
+                        isActive ? textActive : textInactive
+                      }`}
                     >
                       {isActive && (
                         <motion.span
                           layoutId="navbar-pill"
                           className={`absolute inset-0 rounded-full border ${pillClass}`}
-                          transition={{ type: "spring", stiffness: 380, damping: 34 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 34,
+                          }}
                         />
                       )}
                       <span className="relative z-10">{link.name}</span>
