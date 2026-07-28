@@ -27,7 +27,31 @@ export default function Projects() {
       type: ["web"],
       tags: ["all", "client"],
       index: 1,
-      content: "A",
+      content: `My role at UKIBC was to completely rebuild their website, migrating it from an old WordPress installation to a modern full-stack architecture. They wanted advanced animations, fully custom UI components, and custom business logic that wasn't possible with their previous setup.
+      <br><br>
+      The organization already had thousands of existing posts, news articles, events, and reports. One of my first tasks was migrating all of this content from WordPress into Amazon DynamoDB. Since the data was largely unstructured, a document database was the right choice—it was cost-effective on AWS and performed well for the project's requirements. I also migrated all media assets to Amazon S3, allowing them to be served efficiently through CloudFront.
+<br><br>
+To automate the migration, I wrote a custom Python script that transferred content directly from the WordPress API into DynamoDB.
+<br><br>
+Once the migration was complete, I started building the frontend and integrating it with the new database.
+<br><br>
+This project was particularly challenging because it required much more than standard CRUD functionality for posts and reports. The entire website had to be fully dynamic, allowing administrators to modify sections, titles, images, and page content without touching the code. Every page has its own dedicated admin interface, making the entire website editable from the backend.
+<br><br>
+This project also gave me practical experience with Server-Side Rendering (SSR) and Incremental Static Regeneration (ISR). Initially, I hosted the website on Vercel, but because of the large number of images that needed optimization and delivery, I reached the limits of the free plan on the first day after launch. Rather than paying for Vercel's Pro plan, I decided to migrate the project to AWS Amplify. Although configuring ISR on Amplify introduced its own challenges, the migration proved worthwhile. The website became faster than it was on Vercel, while the complete AWS infrastructure cost remained under $5 per month.
+<br><br>
+The infrastructure uses a combination of AWS services:
+<br><br>
+Amazon DynamoDB for content storage
+<br>
+Amazon S3 for media storage
+<br>
+Amazon CloudFront for global content delivery
+<br>
+AWS Amplify for hosting and deployment
+<br><br>
+Despite being my first large-scale production infrastructure project, it taught me a great deal about cloud architecture, performance optimization, and scalable web development. Seeing everything come together into a fast, reliable, and cost-effective platform made the challenges well worth it.
+<br><br>
+Note: The website is now managed by UKIBC's internal team. I handed over the complete codebase and the project is hosted within their own AWS infrastructure.`,
     },
     {
       title: "Ardent Co.",
@@ -38,7 +62,18 @@ export default function Projects() {
       tags: ["all", "client"],
       type: ["web"],
       index: 2,
-      content: "A",
+      content: `Ardent Co wanted a modern, animation-heavy website that reflected their brand identity. My work on this project was primarily focused on the frontend, with the exception of the contact forms, which required SMTP integration, along with Google and Meta Analytics for visitor tracking.<br><br>
+
+I had only recently started working with React and Next.js when I got Ardent Co as a client. Although I was new to Next.js, I picked it up quickly because this project was more creative than technically complex. It also introduced me to several animation frameworks that make websites feel more interactive and engaging. Two of the main libraries I learned were Framer Motion and GSAP. This website relies primarily on Framer Motion for its animations, and it has remained one of my go-to libraries because of how simple it is to use while still producing smooth, high-quality animations.<br><br>
+
+Every carousel on the website was built from scratch. I deliberately avoided using pre-built components or libraries because I wanted complete control over the behavior and animations. This approach not only gave me the flexibility to create exactly what I envisioned but also helped me better understand how these interactions work under the hood.<br><br>
+
+One of my favorite sections is the first one users encounter after the landing page. It features a 3D chess piece rendered with Three.js that rotates clockwise or counterclockwise depending on the user's scroll direction. Since this is the first section visitors see after scrolling, I wanted it to leave a strong impression.<br><br>
+
+Before settling on the chess piece, I experimented with several concepts. One idea used a compass as the background with the compass needle as a separate PNG layered on top. The needle would rotate 90 degrees as the user moved between sections. Exploring ideas like these and solving the animation challenges was one of the most enjoyable parts of building this project.<br><br>
+
+Note: The website is now managed by Ardent Co's own team. I handed over the complete codebase, and it is now hosted on their own infrastructure.
+`,
     },
     {
       title: "Remaster",
@@ -60,7 +95,14 @@ export default function Projects() {
       tags: ["all", "client"],
       type: ["web"],
       index: 4,
-      content: "A",
+      content: `Rhetor was a fast-paced client project that I completed in under a week. It is a single-page website that required a variety of animations and several sections where I had the freedom to be creative.<br><br>
+
+This project was where I properly learned <a href="https://gsap.com/" target="_blank" rel="noopener noreferrer">GSAP</a>. It required sequenced animations and fine-grained control over individual animation timelines. Combining <a href="https://motion.dev/" target="_blank" rel="noopener noreferrer">Framer Motion</a> for smooth UI transitions with GSAP for complex animation sequences allowed me to build the entire experience exactly as the client envisioned.<br><br>
+
+Each section of the website uses relatively simple GSAP animations, but together they create an engaging experience that matches Rhetor's branding. Every section occupies the full viewport height (100vh) and snaps into place as the user scrolls, which was a specific requirement from the client.<br><br>
+
+Personally, I prefer websites with natural scrolling over full-page snap scrolling, especially when a visible scrollbar is present. That preference influenced the design of <a href="https://kanwarnoor.com" target="_blank" rel="noopener noreferrer">kanwarnoor.com</a>, where I built pages that transition their content based on the user's scroll position instead of relying on traditional page snapping. This approach keeps the experience fluid while still allowing for highly interactive animations.
+`,
     },
     {
       title: "Guru Nanak Dev University",
@@ -296,7 +338,7 @@ export default function Projects() {
           </div>
         </div>
       ) : (
-        <div className="w-1/2 h-full justify-center items-center flex flex-col py-24">
+        <div className="w-full min-h-screen max-h-screen overflow-y-auto items-start flex flex-col pt-24 pb-32 relative">
           <motion.div
             initial={{
               opacity: 0,
@@ -320,7 +362,7 @@ export default function Projects() {
               height={0}
               sizes="100vh"
               aria-hidden
-              className="absolute  inset-0  w-full h-full scale-105 blur-2xl opacity-70 rounded-2xl pointer-events-none"
+              className="absolute  inset-0  w-1/2 h-full justify-center m-auto scale-105 blur-2xl opacity-70 rounded-2xl pointer-events-none"
               alt=""
             />
             {/* sharp image on top */}
@@ -329,10 +371,10 @@ export default function Projects() {
               width={0}
               height={0}
               sizes="100vh"
-              className="relative z-10 w-full h-full rounded-2xl"
+              className="relative z-10 w-1/2 justify-center m-auto h-full rounded-2xl"
               alt="project image"
             />
-            <div className="flex items-center gap-3 z-10 -bottom-5 absolute left-5 text-6xl font-bold text-left ">
+            <div className="flex w-1/2 left-0 right-0 justify-center m-auto items-center gap-3 z-10 -bottom-5 absolute text-6xl font-bold text-left">
               <motion.span
                 initial={{ opacity: 0, filter: "blur(20px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
@@ -406,7 +448,7 @@ export default function Projects() {
             transition={{
               delay: 0.5,
             }}
-            className="mt-20 text-left mr-auto ml-5 text-xl"
+            className="project-content mt-20 text-left text-xl w-[70%] text-white/80 m-auto"
             dangerouslySetInnerHTML={{
               __html: data[content.index - 1].content ?? "",
             }}
@@ -418,7 +460,7 @@ export default function Projects() {
             whileHover={{
               scale: "110%",
             }}
-            className="absolute right-10 top-20 cursor-pointer hover:scale-110"
+            className="fixed right-10 top-20 cursor-pointer hover:scale-110 z-50"
             onClick={() => setContent((prev) => ({ ...prev, active: false }))}
           >
             <svg
@@ -442,7 +484,7 @@ export default function Projects() {
             whileHover={{
               scale: "110%",
             }}
-            className="absolute left-1/2 -translate-x-1/2 z-50 bottom-10 cursor-pointer border-white/20 border-1 bg-white/10 backdrop-blur-sm flex flex-row justify-center items-center px-3 py-2 w-fit rounded-full gap-2"
+            className="fixed left-1/2 -translate-x-1/2 z-50 bottom-10 cursor-pointer border-white/20 border-1 bg-white/10 backdrop-blur-sm flex flex-row justify-center items-center px-3 py-2 w-fit rounded-full gap-2"
             onClick={() => window.open(data[content.index - 1].link, "_blank")}
           >
             Check it out
