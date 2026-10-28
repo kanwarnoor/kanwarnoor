@@ -76,6 +76,17 @@ Note: The website is now managed by Ardent Co's own team. I handed over the comp
 `,
     },
     {
+      title: "TSS",
+      des: "Official website for Technical Student Society of G.N.D.U",
+      image: "/images/projects/tss.webp",
+      animation: "center",
+      link: "https://tssgndu.vercel.app/",
+      tags: ["all", "client"],
+      type: ["web"],
+      index: 5,
+      content: "A",
+    },
+    {
       title: "Remaster",
       des: "A platform for artists to store and sell their music",
       image: "/images/projects/remaster.webp",
@@ -112,7 +123,7 @@ Personally, I prefer websites with natural scrolling over full-page snap scrolli
       link: "https://university-verka.vercel.app/",
       tags: ["all", "client", "collaboration"],
       type: ["web"],
-      index: 5,
+      index: 6,
       content: "A",
     },
     {
@@ -123,7 +134,7 @@ Personally, I prefer websites with natural scrolling over full-page snap scrolli
       animation: "center",
       tags: ["all", "personal"],
       type: ["web"],
-      index: 6,
+      index: 7,
       content: "A",
     },
   ];
