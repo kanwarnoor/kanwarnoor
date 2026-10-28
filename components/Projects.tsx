@@ -77,7 +77,7 @@ Note: The website is now managed by Ardent Co's own team. I handed over the comp
     },
     {
       title: "TSS",
-      des: "Official website for Technical Student Society of G.N.D.U",
+      des: "Official website for Technical Student Society of G.N.D.U .",
       image: "/images/projects/tss.webp",
       animation: "center",
       link: "https://tssgndu.vercel.app/",
