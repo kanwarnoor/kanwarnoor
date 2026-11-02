@@ -76,17 +76,6 @@ Note: The website is now managed by Ardent Co's own team. I handed over the comp
 `,
     },
     {
-      title: "TSS",
-      des: "Official website for Technical Student Society of G.N.D.U .",
-      image: "/images/projects/tss.webp",
-      animation: "center",
-      link: "https://tssgndu.vercel.app/",
-      tags: ["all", "client"],
-      type: ["web"],
-      index: 5,
-      content: "A",
-    },
-    {
       title: "Remaster",
       des: "A platform for artists to store and sell their music",
       image: "/images/projects/remaster.webp",
@@ -115,6 +104,18 @@ Each section of the website uses relatively simple GSAP animations, but together
 Personally, I prefer websites with natural scrolling over full-page snap scrolling, especially when a visible scrollbar is present. That preference influenced the design of <a href="https://kanwarnoor.com" target="_blank" rel="noopener noreferrer">kanwarnoor.com</a>, where I built pages that transition their content based on the user's scroll position instead of relying on traditional page snapping. This approach keeps the experience fluid while still allowing for highly interactive animations.
 `,
     },
+    {
+      title: "TSS",
+      des: "Official website for Technical Student Society of G.N.D.U .",
+      image: "/images/projects/tss.webp",
+      animation: "center",
+      link: "https://tssgndu.vercel.app/",
+      tags: ["all", "client"],
+      type: ["web"],
+      index: 5,
+      content: "A",
+    },
+
     {
       title: "Guru Nanak Dev University",
       des: "Bringing all colleges under one website",
