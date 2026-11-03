@@ -100,7 +100,7 @@ export default async function BlogPage({
 
   return (
     <article className="min-h-screen w-full bg-back text-white flex flex-col items-center pb-20">
-      <div className="w-full max-w-4xl px-4 sm:px-6 pt-6">
+      {/* <div className="w-full xl:max-w-6xl md:max-w-3xl max-w-fit  px-4 sm:px-6 pt-6">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
@@ -121,11 +121,11 @@ export default async function BlogPage({
           </svg>
           Back
         </Link>
-      </div>
+      </div> */}
 
       {blog.coverImage && (
-        <div className="w-full max-w-4xl px-4 sm:px-6 mt-6">
-          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10">
+        <div className="w-full h-full mt-10">
+          <div className="relative w-1/2 rounded-xl border-white/10 border-2 justify-center items-center m-auto aspect-video  overflow-hidden border border-white/10">
             <Image
               src={blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })}
               alt={blog.title}
