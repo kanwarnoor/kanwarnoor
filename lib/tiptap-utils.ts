@@ -12,8 +12,10 @@ import {
   type Editor,
   type NodeWithPos,
 } from "@tiptap/react"
+import axios from "axios"
+import { MAX_BLOG_IMAGE_SIZE } from "@/lib/blog-images"
 
-export const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
+export const MAX_FILE_SIZE = MAX_BLOG_IMAGE_SIZE // 4MB (server body limit)
 
 export const MAC_SYMBOLS: Record<string, string> = {
   mod: "⌘",
@@ -374,17 +376,36 @@ export const handleImageUpload = async (
     )
   }
 
-  // For demo/testing: Simulate upload progress. In production, replace the following code
-  // with your own upload implementation.
-  for (let progress = 0; progress <= 100; progress += 10) {
-    if (abortSignal?.aborted) {
-      throw new Error("Upload cancelled")
-    }
-    await new Promise((resolve) => setTimeout(resolve, 500))
-    onProgress?.({ progress })
-  }
+  const form = new FormData()
+  form.append("file", file)
 
-  return "/images/tiptap-ui-placeholder-image.jpg"
+  try {
+    const { data } = await axios.post<{ url: string }>(
+      "/api/admin/uploads",
+      form,
+      {
+        signal: abortSignal,
+        onUploadProgress: (e) => {
+          if (e.total) {
+            onProgress?.({ progress: Math.round((e.loaded / e.total) * 100) })
+          }
+        },
+      }
+    )
+    if (!data?.url) throw new Error("Upload failed: no URL returned")
+    return data.url
+  } catch (error) {
+    if (axios.isCancel(error)) throw new Error("Upload cancelled")
+    if (axios.isAxiosError(error)) {
+      const message =
+        (error.response?.data as { message?: string } | undefined)?.message ??
+        (error.response?.status === 413
+          ? "Image is too large"
+          : error.message)
+      throw new Error(message)
+    }
+    throw error
+  }
 }
 
 type ProtocolOptions = {

@@ -188,9 +188,22 @@ const MobileToolbarContent = ({
 export interface SimpleEditorProps {
   content?: JSONContent | string | null
   onUpdate?: (json: JSONContent) => void
+  onImageUploadError?: (error: Error) => void
+  /** Called with the URL of every image successfully uploaded. */
+  onImageUploaded?: (url: string) => void
 }
 
-export function SimpleEditor({ content, onUpdate }: SimpleEditorProps = {}) {
+export function SimpleEditor({
+  content,
+  onUpdate,
+  onImageUploadError,
+  onImageUploaded,
+}: SimpleEditorProps = {}) {
+  // Extensions are configured once, so read the latest callbacks via refs.
+  const onImageUploadErrorRef = useRef(onImageUploadError)
+  onImageUploadErrorRef.current = onImageUploadError
+  const onImageUploadedRef = useRef(onImageUploaded)
+  onImageUploadedRef.current = onImageUploaded
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
@@ -234,8 +247,15 @@ export function SimpleEditor({ content, onUpdate }: SimpleEditorProps = {}) {
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
         limit: 3,
-        upload: handleImageUpload,
-        onError: (error) => console.error("Upload failed:", error),
+        upload: async (file, onProgress, abortSignal) => {
+          const url = await handleImageUpload(file, onProgress, abortSignal)
+          onImageUploadedRef.current?.(url)
+          return url
+        },
+        onError: (error) => {
+          console.error("Upload failed:", error)
+          onImageUploadErrorRef.current?.(error)
+        },
       }),
     ],
     content: initialContent ?? "",

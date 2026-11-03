@@ -5,6 +5,7 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { JSONContent } from "@tiptap/react";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
+import { hasPendingImageUploads } from "@/lib/blog-images";
 
 type Visibility = "PUBLIC" | "PRIVATE" | "UNLISTED";
 
@@ -123,6 +124,18 @@ function parseContent(raw: string | undefined | null): JSONContent | null {
   }
 }
 
+/** Prefer the server's { message } over axios's generic "status code 500". */
+function describeError(error: unknown): string | null {
+  if (!error) return null;
+  if (axios.isAxiosError(error)) {
+    const serverMessage = (
+      error.response?.data as { message?: string } | undefined
+    )?.message;
+    if (serverMessage) return serverMessage;
+  }
+  return (error as Error).message ?? "Something went wrong";
+}
+
 function BlogForm({
   closeItem,
   blog,
@@ -143,9 +156,35 @@ function BlogForm({
   const [coverFile, setCoverFile] = useState<File | null>(null);
   const [coverPreview, setCoverPreview] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [imageError, setImageError] = useState<string | null>(null);
+  const [removeCover, setRemoveCover] = useState(false);
+  const coverInputRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<JSONContent | null>(parseContent(blog?.content));
+  // Every content image uploaded while this editor is open.
+  const sessionUploadsRef = useRef<Set<string>>(new Set());
 
   const queryClient = useQueryClient();
+
+  // When the editor closes (or the tab is closed), ask the server to delete
+  // uploads that no saved blog uses: images removed before saving, or the
+  // whole session if it was never saved. The server checks references, so
+  // images that made it into a saved post are kept.
+  useEffect(() => {
+    const uploads = sessionUploadsRef.current;
+    const flush = () => {
+      if (uploads.size === 0) return;
+      const body = new Blob([JSON.stringify({ urls: [...uploads] })], {
+        type: "application/json",
+      });
+      navigator.sendBeacon("/api/admin/uploads/cleanup", body);
+      uploads.clear();
+    };
+    window.addEventListener("pagehide", flush);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      flush();
+    };
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -161,6 +200,11 @@ function BlogForm({
       if (!contentRef.current) {
         throw new Error("Content cannot be empty");
       }
+      if (hasPendingImageUploads(contentRef.current)) {
+        throw new Error(
+          "An image is still uploading (or failed). Wait for it to finish or remove the upload box before saving."
+        );
+      }
 
       const form = new FormData();
       form.append("title", title.trim());
@@ -169,6 +213,7 @@ function BlogForm({
       form.append("visibility", visibility);
       form.append("content", JSON.stringify(contentRef.current));
       if (coverFile) form.append("coverImage", coverFile);
+      else if (removeCover) form.append("removeCover", "true");
 
       const url = isEditMode
         ? `/api/admin/blogs/${blog!.id}`
@@ -196,16 +241,26 @@ function BlogForm({
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
     setCoverFile(file);
+    if (file) setRemoveCover(false);
     if (coverPreview) URL.revokeObjectURL(coverPreview);
     setCoverPreview(file ? URL.createObjectURL(file) : null);
   };
 
+  /** Drops a newly picked (unsaved) cover file. */
+  const clearPickedCover = () => {
+    setCoverFile(null);
+    if (coverPreview) URL.revokeObjectURL(coverPreview);
+    setCoverPreview(null);
+    if (coverInputRef.current) coverInputRef.current.value = "";
+  };
+
+  const hasSavedCover = isEditMode && !!blog?.coverImage;
+
   const isSaving = saveMutation.isPending;
   const isDeleting = deleteMutation.isPending;
-  const errorMessage =
-    (saveMutation.error as Error | null)?.message ??
-    (deleteMutation.error as Error | null)?.message ??
-    null;
+  const errorMessage = describeError(
+    saveMutation.error ?? deleteMutation.error
+  );
 
   return (
     <form
@@ -271,29 +326,61 @@ function BlogForm({
 
       <div className="flex flex-col gap-2">
         <label className="text-sm text-white/70">
-          Cover image{isEditMode ? " (leave empty to keep current)" : ""}
+          Cover image
+          {hasSavedCover && !removeCover ? " (leave empty to keep current)" : ""}
         </label>
-        {isEditMode && blog?.coverImage && !coverPreview && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`/api/blogs/${blog.id}/cover`}
-            alt="Current cover"
-            className="max-h-48 w-auto object-cover rounded-md border border-white/10"
-          />
+        {hasSavedCover && !coverPreview && !removeCover && (
+          <div className="flex items-start gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/api/blogs/${blog!.id}/cover`}
+              alt="Current cover"
+              className="max-h-48 w-auto object-cover rounded-md border border-white/10"
+            />
+            <button
+              type="button"
+              onClick={() => setRemoveCover(true)}
+              className="px-3 py-1 rounded-md border border-red-500/60 text-red-400 text-sm hover:bg-red-500/10 cursor-pointer"
+            >
+              Remove
+            </button>
+          </div>
+        )}
+        {hasSavedCover && removeCover && !coverPreview && (
+          <p className="text-sm text-white/60">
+            Cover will be removed when you save.{" "}
+            <button
+              type="button"
+              onClick={() => setRemoveCover(false)}
+              className="underline cursor-pointer"
+            >
+              Undo
+            </button>
+          </p>
         )}
         <input
+          ref={coverInputRef}
           type="file"
           accept="image/*"
           onChange={handleCoverChange}
           className="w-full p-2 rounded-md border border-white/30 bg-black/30 text-white file:bg-white/10 file:border-0 file:text-white file:px-3 file:py-1 file:mr-3 file:rounded-md cursor-pointer"
         />
         {coverPreview && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={coverPreview}
-            alt="Cover preview"
-            className="mt-2 max-h-48 w-auto object-cover rounded-md border border-white/10"
-          />
+          <div className="mt-2 flex items-start gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={coverPreview}
+              alt="Cover preview"
+              className="max-h-48 w-auto object-cover rounded-md border border-white/10"
+            />
+            <button
+              type="button"
+              onClick={clearPickedCover}
+              className="px-3 py-1 rounded-md border border-red-500/60 text-red-400 text-sm hover:bg-red-500/10 cursor-pointer"
+            >
+              Remove
+            </button>
+          </div>
         )}
       </div>
 
@@ -305,8 +392,22 @@ function BlogForm({
             onUpdate={(json) => {
               contentRef.current = json;
             }}
+            onImageUploadError={(error) => setImageError(error.message)}
+            onImageUploaded={(url) => sessionUploadsRef.current.add(url)}
           />
         </div>
+        {imageError && (
+          <p className="text-red-400 text-sm flex items-center gap-2">
+            Image upload failed: {imageError}
+            <button
+              type="button"
+              onClick={() => setImageError(null)}
+              className="underline cursor-pointer"
+            >
+              dismiss
+            </button>
+          </p>
+        )}
       </div>
 
       {errorMessage && (

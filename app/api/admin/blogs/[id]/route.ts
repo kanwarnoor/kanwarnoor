@@ -4,6 +4,12 @@ import { Visibility } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { S3_BUCKET, s3Client } from "@/lib/s3";
 import { isAdmin } from "@/lib/admin-auth";
+import { collectBlogImageKeys } from "@/lib/blog-images";
+import {
+  deleteUnreferencedBlogImages,
+  parseStoredContent,
+  removedImageKeys,
+} from "@/lib/blog-images-server";
 
 export const runtime = "nodejs";
 
@@ -97,6 +103,7 @@ export async function PATCH(
     const excerptRaw = form.get("excerpt") as string | null;
     const visibility = parseVisibility(form.get("visibility") as string | null);
     const cover = form.get("coverImage");
+    const removeCover = form.get("removeCover") === "true";
 
     const data: {
       title?: string;
@@ -136,12 +143,21 @@ export async function PATCH(
       );
       data.coverImage = key;
       oldCoverToDelete = existing.coverImage;
+    } else if (removeCover && existing.coverImage) {
+      data.coverImage = null;
+      oldCoverToDelete = existing.coverImage;
     }
 
     const updated = await prisma.blog.update({ where: { id }, data });
 
     if (oldCoverToDelete && oldCoverToDelete !== updated.coverImage) {
       await deleteFromS3(oldCoverToDelete);
+    }
+
+    if (data.content !== undefined) {
+      await deleteUnreferencedBlogImages(
+        removedImageKeys(existing.content, updated.content)
+      );
     }
 
     return NextResponse.json(updated, { status: 200 });
@@ -165,7 +181,7 @@ export async function DELETE(
     const { id } = await params;
     const existing = await prisma.blog.findUnique({
       where: { id },
-      select: { coverImage: true },
+      select: { coverImage: true, content: true },
     });
     if (!existing) {
       return NextResponse.json({ message: "Not found" }, { status: 404 });
@@ -173,6 +189,10 @@ export async function DELETE(
 
     await prisma.blog.delete({ where: { id } });
     await deleteFromS3(existing.coverImage);
+
+    await deleteUnreferencedBlogImages(
+      collectBlogImageKeys(parseStoredContent(existing.content))
+    );
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
