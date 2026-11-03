@@ -31,11 +31,16 @@ const oswald = Oswald({
   variable: "--font-oswald",
 });
 
+// Absolute base for og:image etc. Link-preview crawlers must be able to reach
+// it, so prefer the production domain: VERCEL_URL is the per-deployment URL,
+// which Vercel's deployment protection blocks for bots.
+const vercelHost =
+  process.env.VERCEL_ENV === "production"
+    ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+    : process.env.VERCEL_URL;
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
+  (vercelHost ? `https://${vercelHost}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

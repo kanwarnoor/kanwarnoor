@@ -44,7 +44,18 @@ export function hasPendingImageUploads(content: JSONContent | null): boolean {
  * the URL, and browsers / the Next image optimizer fetch the new image.
  */
 export function blogCoverUrl(blog: { id: string; coverImage: string }) {
-  return `/api/blogs/${blog.id}/cover?v=${encodeURIComponent(
-    blog.coverImage.split("/").pop() ?? blog.coverImage
-  )}`;
+  return `/api/blogs/${blog.id}/cover?v=${coverVersion(blog.coverImage)}`;
+}
+
+/** Size of the link-preview (Open Graph / Twitter card) image. */
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
+
+/** Link-preview URL for a blog's cover: resized JPEG (see app/api/blogs/[id]/og). */
+export function blogOgImageUrl(blog: { id: string; coverImage: string }) {
+  return `/api/blogs/${blog.id}/og?v=${coverVersion(blog.coverImage)}`;
+}
+
+function coverVersion(coverImage: string) {
+  return encodeURIComponent(coverImage.split("/").pop() ?? coverImage);
 }

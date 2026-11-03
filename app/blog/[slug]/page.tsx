@@ -6,7 +6,12 @@ import type { JSONContent } from "@tiptap/react";
 
 import { prisma } from "@/lib/prisma";
 import BlogContent from "@/components/blog/BlogContent";
-import { blogCoverUrl } from "@/lib/blog-images";
+import {
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  blogCoverUrl,
+  blogOgImageUrl,
+} from "@/lib/blog-images";
 
 export const dynamic = "force-dynamic";
 
@@ -49,7 +54,13 @@ export async function generateMetadata({
 
   const description = blog.excerpt ?? `By ${blog.author}`;
   const ogImage = blog.coverImage
-    ? blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })
+    ? {
+        url: blogOgImageUrl({ id: blog.id, coverImage: blog.coverImage }),
+        width: OG_IMAGE_WIDTH,
+        height: OG_IMAGE_HEIGHT,
+        type: "image/jpeg",
+        alt: blog.title,
+      }
     : undefined;
 
   return {
@@ -64,7 +75,7 @@ export async function generateMetadata({
       url: `/blog/${slug}`,
       authors: [blog.author],
       publishedTime: blog.createdAt.toISOString(),
-      images: ogImage ? [{ url: ogImage, alt: blog.title }] : undefined,
+      images: ogImage ? [ogImage] : undefined,
     },
     twitter: {
       card: ogImage ? "summary_large_image" : "summary",
