@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { RouteContext } from "@/context/routeContext";
 
+
 const SLIDE_MS = 450;
 // Navbar order — used to decide travel direction.
 const ORDER = ["/", "/about", "/projects", "/skills", "/blog", "/contact"];
