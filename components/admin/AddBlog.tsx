@@ -5,7 +5,7 @@ import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { JSONContent } from "@tiptap/react";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
-import { hasPendingImageUploads } from "@/lib/blog-images";
+import { blogCoverUrl, hasPendingImageUploads } from "@/lib/blog-images";
 
 type Visibility = "PUBLIC" | "PRIVATE" | "UNLISTED";
 
@@ -333,7 +333,7 @@ function BlogForm({
           <div className="flex items-start gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`/api/blogs/${blog!.id}/cover`}
+              src={blogCoverUrl({ id: blog!.id, coverImage: blog!.coverImage! })}
               alt="Current cover"
               className="max-h-48 w-auto object-cover rounded-md border border-white/10"
             />

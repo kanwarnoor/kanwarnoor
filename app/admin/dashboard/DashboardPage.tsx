@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfoCard from "@/components/InfoCard";
 import AddBlog from "@/components/admin/AddBlog";
+import { blogCoverUrl } from "@/lib/blog-images";
 
 type Visibility = "PUBLIC" | "PRIVATE" | "UNLISTED";
 
@@ -116,7 +117,7 @@ export default function DashboardPage({ logout }: DashboardProps) {
                   des={blog.excerpt ?? blog.author}
                   image={
                     blog.coverImage
-                      ? `/api/blogs/${blog.id}/cover`
+                      ? blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })
                       : "/images/projects/remaster.webp"
                   }
                   link={`/blog/${blog.slug}`}

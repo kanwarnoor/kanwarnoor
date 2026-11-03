@@ -6,6 +6,7 @@ import type { JSONContent } from "@tiptap/react";
 
 import { prisma } from "@/lib/prisma";
 import BlogContent from "@/components/blog/BlogContent";
+import { blogCoverUrl } from "@/lib/blog-images";
 
 export const dynamic = "force-dynamic";
 
@@ -47,7 +48,9 @@ export async function generateMetadata({
   if (!blog || blog.visibility === "PRIVATE") return { title: "Not found" };
 
   const description = blog.excerpt ?? `By ${blog.author}`;
-  const ogImage = blog.coverImage ? `/api/blogs/${blog.id}/cover` : undefined;
+  const ogImage = blog.coverImage
+    ? blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })
+    : undefined;
 
   return {
     title: blog.title,
@@ -113,7 +116,7 @@ export default async function BlogPage({
         <div className="w-full max-w-4xl px-4 sm:px-6 mt-6">
           <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10">
             <Image
-              src={`/api/blogs/${blog.id}/cover`}
+              src={blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })}
               alt={blog.title}
               fill
               priority

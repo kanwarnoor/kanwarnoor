@@ -5,6 +5,7 @@ import React from "react";
 import InfoCard from "./InfoCard";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
+import { blogCoverUrl } from "@/lib/blog-images";
 
 interface Blog {
   id: string;
@@ -68,7 +69,7 @@ export default function Blog({ blogs }: { blogs: Blog[] }) {
                 des={blog.excerpt ?? blog.author}
                 image={
                   blog.coverImage
-                    ? `/api/blogs/${blog.id}/cover`
+                    ? blogCoverUrl({ id: blog.id, coverImage: blog.coverImage })
                     : "/images/projects/remaster.webp"
                 }
                 link={`/blog/${blog.slug}`}

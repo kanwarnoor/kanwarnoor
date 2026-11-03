@@ -37,3 +37,14 @@ export function hasPendingImageUploads(content: JSONContent | null): boolean {
   if (content.type === "imageUpload") return true;
   return content.content?.some(hasPendingImageUploads) ?? false;
 }
+
+/**
+ * Public URL for a blog's cover image. Every upload gets a fresh S3 key, so
+ * the key doubles as a cache-busting version: replacing the cover changes
+ * the URL, and browsers / the Next image optimizer fetch the new image.
+ */
+export function blogCoverUrl(blog: { id: string; coverImage: string }) {
+  return `/api/blogs/${blog.id}/cover?v=${encodeURIComponent(
+    blog.coverImage.split("/").pop() ?? blog.coverImage
+  )}`;
+}
